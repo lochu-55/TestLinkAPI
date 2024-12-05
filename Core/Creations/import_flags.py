@@ -185,7 +185,7 @@ class Test:
 
 
     def get_or_create_test_suite(self,suite_name):
-        project_id = self.get_project_id("PCI")
+        project_id = self.get_project_id(inputs.PROJECT_NAME)
         suites = self.tlc.getFirstLevelTestSuitesForTestProject(project_id)
         for suite in suites:
             if suite["name"] == suite_name:
