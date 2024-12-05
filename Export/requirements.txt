@@ -1,0 +1,6 @@
+beautifulsoup4
+TestLink-API-Python-client
+openpyxl
+pandas
+
+#run pip install -r requirements.txt
