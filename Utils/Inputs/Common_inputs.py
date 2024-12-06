@@ -2,6 +2,7 @@
 
 class inputs:
     API_URL = "http://172.17.17.8:8085/lib/api/xmlrpc/v1/xmlrpc.php"
+    LOGIN = "http://172.17.17.93:8085/login.php?note=logout&viewer="
     KEY = "10b2132073a17c9d4a0bc700dd778f83"
     PROJECT_NAME = "PCI"
     PROJECT_PREFIX ="pcie"
