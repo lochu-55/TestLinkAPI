@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<keywords><keyword name="Basic Functionality"><notes><![CDATA[
-
+<keywords><keyword name="Functional"><notes><![CDATA[
+Description for the Functional keyword.
 ]]></notes></keyword>
-<keyword name="performance"><notes><![CDATA[
-
+<keyword name="Keyword01"><notes><![CDATA[
+Description for the Keyword01 keyword.
 ]]></notes></keyword>
-<keyword name="regression"><notes><![CDATA[
-
+<keyword name="Performance"><notes><![CDATA[
+Description for the Performance keyword.
 ]]></notes></keyword>
-<keyword name="sanity"><notes><![CDATA[
-
+<keyword name="Sample Keyword"><notes><![CDATA[
+Discription for the Sample test case
 ]]></notes></keyword>
-<keyword name="smoke"><notes><![CDATA[
-
+<keyword name="Security"><notes><![CDATA[
+Description for the Security keyword.
+]]></notes></keyword>
+<keyword name="Stability"><notes><![CDATA[
+Description for the Stability keyword.
+]]></notes></keyword>
+<keyword name="Stress"><notes><![CDATA[
+Description for the Stress keyword.
 ]]></notes></keyword>
 </keywords>
