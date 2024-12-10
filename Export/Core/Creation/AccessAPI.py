@@ -5,18 +5,14 @@ open('Utils/testlink_export.log', 'w').close()
 # Set up logging
 logging.basicConfig(filename='Utils/testlink_export.log',level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.DEBUG)
-console_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-console_handler.setFormatter(console_format)
 
-logger.addHandler(console_handler)
 
 class TestLinkManager:
     def __init__(self, url, api_key):
         try:
             self.testlink = TestlinkAPIClient(url, api_key)
             logger.info("TestLink API Client initialized successfully.")
+            print("TestLink API Client initialized successfully.")
         except Exception as e:
             logger.error(f"Failed to initialize TestLink API Client: {e}")
             raise
@@ -40,22 +36,22 @@ class TestLinkManager:
             logger.error(f"     Error fetching test plans for project {project_name}: {e}")
             raise
 
-    def get_test_suites_for_test_plan(self, plan_id):
+    def get_test_suites_for_test_plan(self, plan_id, plan_name):
         try:
             test_suites = self.testlink.getTestSuitesForTestPlan(plan_id)
-            logger.info(f"      Fetched {len(test_suites)} test suites for plan {plan_id}.")
+            logger.info(f"      Fetched {len(test_suites)} test suites for plan {plan_name}.")
             return test_suites
         except Exception as e:
-            logger.error(f"     Error fetching test suites for test plan {plan_id}: {e}")
+            logger.error(f"     Error fetching test suites for test plan {plan_name}: {e}")
             raise
 
-    def get_test_cases_for_test_plan(self, plan_id):
+    def get_test_cases_for_test_plan(self, plan_id, plan_name):
         try:
             test_cases = self.testlink.getTestCasesForTestPlan(plan_id)
-            logger.info(f"      Fetched {len(test_cases)} test cases for plan {plan_id}.")
+            logger.info(f"      Fetched {len(test_cases)} test cases for plan {plan_name}.")
             return test_cases
         except Exception as e:
-            logger.error(f"     Error fetching test cases for test plan {plan_id}: {e}")
+            logger.error(f"     Error fetching test cases for test plan {plan_name}: {e}")
             raise
 
     def get_test_case_details(self, case_id):
@@ -68,17 +64,41 @@ class TestLinkManager:
             raise
 
 
-    def fetch_requirements(self, project_id,project_name):
+    def fetch_project_requirements(self, project_id,project_name):
         try:
             requirements = self.testlink.getRequirements(project_id)
 
             if requirements:
                 req_doc_ids = [req['req_doc_id'] for req in requirements]
-                logger.info(f"      Fetched {len(req_doc_ids)} requirements for project {project_name}.")
+                logger.info(f"Fetched {len(req_doc_ids)} requirements for project {project_name}.\n   {', '.join(req_doc_ids)}")
                 return req_doc_ids
             else:
-                logger.info(f"      No requirements found for project {project_name}.")
+                logger.info(f"No requirements found for project {project_name}.")
                 return []
+        except Exception as e:
+            logger.error(f"Error fetching requirements for project {project_name}: {e}")
+            raise
+
+    def fetch_testcase_requirements(self, project_id,project_name,tcase_id):
+        try:
+            requirements = self.testlink.getRequirements(project_id)
+
+            if requirements:
+                l = []
+                for i in requirements:
+                    req_doc_id = i['req_doc_id']
+                    req = self.testlink.getReqCoverage(project_id,req_doc_id)
+
+                    if req == []:
+                        continue
+                    else:
+                        for j in req:
+                            if tcase_id == j['id']:
+                                l.append(req_doc_id)
+                if l == []:
+                    return " "
+                else:
+                    return ", ".join(l)
         except Exception as e:
             logger.error(f"     Error fetching requirements for project {project_name}: {e}")
             raise
@@ -127,6 +147,3 @@ class TestLinkManager:
         except Exception as e:
             logger.error(f"     Error getting execution type for test case {testcasedetails}: {e}")
             raise
-
-
-
