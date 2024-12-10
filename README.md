@@ -82,12 +82,12 @@ Update the configuration file `Utils/Inputs/Common_inputs.py` with your required
 
 1. Grant execute permissions to the shell script:
     ```bash
-    chmod 777 testlink_total.sh
+    chmod 777 testlink_import.sh
     ```
 
 2. Execute the script to start importing test cases:
     ```bash
-    ./testlink_total.sh
+    ./testlink_import.sh
     ```
 
 ---
