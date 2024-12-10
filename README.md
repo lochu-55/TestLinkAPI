@@ -61,7 +61,7 @@ The configuration and Docker files have been pushed to the following repository:
 
 ### Configure the Framework
 
-Update the configuration file `Utils/Inputs/Common_inputs.py` with your required values and paths:
+Update the configuration file `Import_TestCases/Utils/Inputs/Common_inputs.py` with your required values and paths:
 
 - `API_URL`: The TestLink API URL.
 - `LOGIN`: The TestLink login URL.
