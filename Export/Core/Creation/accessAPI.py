@@ -5,12 +5,7 @@ open('Utils/testlink_export.log', 'w').close()
 # Set up logging
 logging.basicConfig(filename='Utils/testlink_export.log',level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.DEBUG)
-console_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-console_handler.setFormatter(console_format)
 
-logger.addHandler(console_handler)
 
 class TestLinkManager:
     def __init__(self, url, api_key):
