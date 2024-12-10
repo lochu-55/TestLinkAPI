@@ -20,7 +20,7 @@ The configuration and Docker files have been pushed to the following repository:
 2. **Build and install TestLink using Docker Compose**
    Run the following commands in your terminal:
    ```bash
-   docker-compose --env-file ./envs/testlink-1.9.19.env -f docker-compose.yml -f docker-        compose.build.yml build tl_code
+   docker-compose --env-file ./envs/testlink-1.9.19.env -f docker-compose.yml -f docker-compose.build.yml build tl_code
    docker-compose --env-file ./envs/testlink-1.9.19.env -f docker-compose.yml -f docker-compose.build.yml build tl_pg tl_apache
    docker-compose --env-file ./envs/testlink-1.9.19.env -f docker-compose.yml up -d
 
