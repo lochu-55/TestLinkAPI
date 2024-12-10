@@ -52,7 +52,7 @@ The configuration and Docker files have been pushed to the following repository:
 
 2. Install the required dependencies:
     ```bash
-    pip install -r Utils/Libraries/requirements.txt
+    pip install -r Import_TestCases/Utils/Libraries/requirements.txt
     ```
 
 ---
