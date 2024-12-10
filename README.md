@@ -115,7 +115,7 @@ To access the database used by TestLink:
     "IPAddress": "172.21.0.2",
     ```
 
-3. Replace the value of variable named host in class DB present in Utils/Inputs/Common_inputs with above retreived IPAddress
+3. Replace the value of variable named **host** in class **DB** present in **"Utils/Inputs/Common_inputs"** with above retreived IPAddress
    
 
 ---
