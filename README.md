@@ -17,7 +17,7 @@ This framework automates the process of importing test cases into TestLink.
 1. Clone the repository:
     ```bash
     git clone <repository_url>
-    cd TestLink_API
+    cd TestLinkAPI
     ```
 
 2. Install the required dependencies:
