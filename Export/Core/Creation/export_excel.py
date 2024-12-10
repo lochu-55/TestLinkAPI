@@ -12,7 +12,7 @@ class ExportToExcel:
         data = []
         try:
             projects = self.testlink_manager.get_projects()
-            logger.info("Successfully fetched projects from TestLink.")
+            print("Successfully fetched projects from TestLink.")
         except Exception as e:
             logger.error(f"Failed to fetch projects: {e}")
             return []
@@ -164,7 +164,7 @@ class ExportToExcel:
         try:
             df = pd.DataFrame(data)
             df.to_excel(filename, index=False)
-            logger.info(f"Data successfully exported to {filename}")
+            print(f"Data successfully exported to {filename}")
         except Exception as e:
             logger.error(f"Failed to export data to Excel: {e}")
 
