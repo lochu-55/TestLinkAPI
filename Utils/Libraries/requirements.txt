@@ -1,5 +1,0 @@
-openpyxl
-TestLink-API-Python-client
-psycopg2-binary
-selenium
-pandas
