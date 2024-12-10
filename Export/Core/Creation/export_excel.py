@@ -1,4 +1,3 @@
-#from accessAPI import TestLinkManager,logger
 from AccessAPI import TestLinkManager,logger
 import pandas as pd
 from re import sub
@@ -13,7 +12,7 @@ class ExportToExcel:
         data = []
         try:
             projects = self.testlink_manager.get_projects()
-            logger.info("Successfully fetched projects from TestLink.")
+            print("Successfully fetched projects from TestLink.")
         except Exception as e:
             logger.error(f"Failed to fetch projects: {e}")
             return []
@@ -179,15 +178,11 @@ if __name__ == "__main__":
     # URL and API key for TestLink
     url = "http://172.17.17.93:8085/lib/api/xmlrpc/v1/xmlrpc.php"
     api_key = "6e6ac11d3cd05d79f5d2d07e7338e0c0"
-    #api_key = "10b2132073a17c9d4a0bc700dd778f83"
-    # Create an instance of TestLinkManager
+    
     testlink_manager = TestLinkManager(url, api_key)
 
-    # Create an instance of ExportToExcel
     exporter = ExportToExcel(testlink_manager)
 
-    # Collect project and test case data
     data = exporter.collect_projects_and_test_cases()
 
-    # Export data to Excel
     exporter.export_to_excel(data)

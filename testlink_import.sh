@@ -1,4 +1,4 @@
-cd /home/vlab/PycharmProjects/TestlinkAPI
+cd Import_TestCases
 
 
 #run below command to install the required libraries
