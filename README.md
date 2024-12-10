@@ -31,18 +31,28 @@ This framework automates the process of importing test cases into TestLink.
 
 ### Configure the Framework
 
-Update the configuration file `Utils/Inputs/Common_inputs.py` with:
+Update the configuration file `Utils/Inputs/Common_inputs.py` with your required values and paths:
 
 - `API_URL`: The TestLink API URL.
-- `KEY`: Your TestLink API Key.
-- `PROJECT_NAME`: Test project name in TestLink.
+- `LOGIN`: The TestLink login URL.
+- `KEY`: Your TestLink API key.
+- `PROJECT_NAME`: The name of the test project in TestLink.
+- `PROJECT_PREFIX`: Prefix for the test project in TestLink.
+- `PLAN_NAME`: Name of the test plan in TestLink.
+- `PLATFORM_NAME`: Name of the platform being tested.
+- `SUITE_NAME`: Name of the test suite in TestLink.
+- `BUILD_NAME`: Name of the build being used.
+- `MANUAL`: Value indicating manual execution type (1 for manual).
 - `EXCEL_PATH`: Path to the Excel file containing the test case data.
+- `LOG_PATH`: Path to the log file directory.
+- `keywords_excel_file`: Path to the Excel file containing keywords.
+- `req_xml_file`: Path to the XML file containing requirements.
 
 ### Run the Framework
 
 1. Grant execute permissions to the shell script:
     ```bash
-    chmod +x testlink_total.sh
+    chmod 777 testlink_total.sh
     ```
 
 2. Execute the script to start importing test cases:
@@ -75,10 +85,8 @@ To access the database used by TestLink:
     "IPAddress": "172.21.0.2",
     ```
 
-3. **Connect to the Database Using the IP Address:**
-    ```bash
-    psql -h 172.21.0.2 -U tlink -d testlink-1.9.19
-    ```
+3. Replace the value of variable named host in class DB present in Utils/Inputs/Common_inputs with above retreived IPAddress
+   
 
 ---
 
