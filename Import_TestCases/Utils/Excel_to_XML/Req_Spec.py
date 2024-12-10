@@ -12,17 +12,10 @@ root = ET.Element("requirement-specification")
 for _, row in df.iterrows():
     req_spec = ET.SubElement(root, "req_spec", title=row['Req-Title'], doc_id=row['Document ID'])
 
-    revision = ET.SubElement(req_spec, "revision")
-
-    revision.text = str(row['Revision'])
-
-
     type_ = ET.SubElement(req_spec, "type")
     type_value = Options.req_Op_Type.get(str(row["Type"]), "0")
     type_.text = str(type_value)
 
-    node_order = ET.SubElement(req_spec, "node_order")
-    node_order.text = str(row['Node Order'])
 
     total_req = ET.SubElement(req_spec, "total_req")
     total_req.text = str(0)
@@ -34,14 +27,12 @@ for _, row in df.iterrows():
 
 
     requirement = ET.SubElement(req_spec, "requirement")
+
     docid = ET.SubElement(requirement, "docid")
     docid.text = str(row['Sub-requirement Doc ID'])
 
     title = ET.SubElement(requirement, "title")
     title.text = str(row['Sub-requirement Title'])
-
-    version = ET.SubElement(requirement, "version")
-    version.text = str(row['Version'])
 
 
     status = ET.SubElement(requirement, "status")
@@ -57,6 +48,9 @@ for _, row in df.iterrows():
     description = ET.SubElement(requirement, "description")
     description_text = row['Scope']
     description.text = f"<![CDATA[<p>{description_text}</p>"
+
+    expected_coverage = ET.SubElement(requirement, "expected_coverage")
+    expected_coverage.text = str(row['Expected-coverage'])
 
 
 print("requirements converted from xlsx to xml successfully.......")
