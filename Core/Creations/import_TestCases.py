@@ -2,23 +2,29 @@ from openpyxl import load_workbook
 from testlink import TestlinkAPIClient
 import re
 from Utils.Inputs.Common_inputs import inputs
+from Utils.Inputs.DropDown_options import Options
+from Utils.Logger.log import get_logger
 
 
 
 class Test:
     tlc = TestlinkAPIClient(inputs.API_URL, inputs.KEY)
+    def __init__(self):
+        self.logger = get_logger()
 
 
     def read_test_case_excel(self,file_path):
 
+        global row
         workbook = load_workbook(filename=file_path)
         sheet = workbook.active
 
 
         headers = {cell.value.strip(): idx for idx, cell in enumerate(sheet[1])}
         required_columns = [
-            "Category", "Test case ID", "Description", "preconditions" ,"Keywords",
-            "status", "importance" , "exec time" , "Steps_actions", "expected_results", "execution_type", "Test cases"
+            "Test Suite", "Test Case Title", "Requirements", "Summary", "preconditions",
+            "Steps_actions", "Keywords", "status", "importance", "TestCase_execution_type","exec time",
+            "expected_results", "step_execution_type"
         ]
 
         for column in required_columns:
@@ -31,38 +37,38 @@ class Test:
 
 
         for row in sheet.iter_rows(min_row=2, values_only=True):
-            category = row[headers["Category"]]
-            test_case_id = row[headers["Test case ID"]]
-            description = row[headers["Description"]]
+            category = row[headers["Test Suite"]]
+            test_case_title = row[headers["Test Case Title"]]
+            requirements = row[headers["Requirements"]]
+            summary = row[headers["Summary"]]
             preconditions = row[headers["preconditions"]]
-            keywords = row[headers["Keywords"]]
-            status = row[headers["status"]]
-            importance = row[headers["importance"]]
-            exec_time = row[headers["exec time"]]
             steps_actions = row[headers["Steps_actions"]]
+            keywords = row[headers["Keywords"]]
+            status = Options.STATUS_MAPPING.get(row[headers["status"]], 0)
+            importance = Options.IMPORTANCE_MAPPING.get(row[headers["importance"]], 0)
+            TC_execution_type = Options.EXECUTION_TYPE_MAPPING.get(row[headers["TestCase_execution_type"]])
+            exec_time = row[headers["exec time"]]
             expected_results = row[headers["expected_results"]]
-            execution_type = row[headers["execution_type"]]
-            test_cases_summary = row[headers["Test cases"]]
+            step_execution_type = Options.EXECUTION_TYPE_MAPPING.get(row[headers["step_execution_type"]], 0)
 
 
-
-            if test_case_id:
+            if test_case_title:
                 if current_test_case:
                     test_case_data.append(current_test_case)
 
                 current_test_case = {
                     "Category": category,
-                    "Test Case ID": test_case_id,
-                    "Description": description,
+                    "Test Case Title": test_case_title,
+                    "Requirements": requirements,
+                    "Summary": summary,
                     "preconditions": preconditions,
                     "status": status,
                     "importance": importance,
+                    "TC_exec_type": TC_execution_type,
                     "exec_time": exec_time,
-                    "exec_type" : execution_type,
                     "Keywords": keywords,
                     "Expected Output": expected_results,
-                    "Steps Data": [],
-                    "summary": test_cases_summary
+                    "Steps Data": []
                 }
 
                 # Reset step number for new test case
@@ -77,7 +83,7 @@ class Test:
                         "step_number": current_step_number,
                         "actions": action,
                         "expected_results": expected_results,
-                        "execution_type": execution_type
+                        "execution_type": step_execution_type
                     }
                     current_test_case["Steps Data"].append(step)
                     current_step_number += 1
@@ -88,41 +94,52 @@ class Test:
 
         # Print and upload test cases
         for test_case in test_case_data:
-            print(f"Category: {test_case['Category']}")
-            print(f"Test Case ID: {test_case['Test Case ID']}")
-            print(f"Description: {test_case['Description']}")
-            print(f"preconditions: {test_case['preconditions']}")
-            print(f"Keywords: {test_case['Keywords']}")
-            print(f"status: {test_case['status']}")
-            print(f"importance: {test_case['importance']}")
-            print(f"execution type: {test_case['exec_type']}")
-            print(f"exec_time: {test_case['exec_time']}")
-            print(f"Expected Output: {test_case['Expected Output']}")
-            print("Steps Data:", test_case['Steps Data'])
-            print("Summary:", test_case['summary'])
-            print("-" * 40,"\n")
+            status_value = test_case["status"]
+            status_key = [k for k, v in Options.STATUS_MAPPING.items() if v == status_value]
+
+            importance_value = test_case["importance"]
+            importance_key = str([k for k, v in Options.IMPORTANCE_MAPPING.items() if v == importance_value])
+
+            exec_type_value = test_case["TC_exec_type"]
+            exec_type_key = str([k for k, v in Options.EXECUTION_TYPE_MAPPING.items() if v == exec_type_value])
+
+            self.logger.info(
+                f"\nCategory: {test_case['Category']}\n"
+                f"Test Case Title: {test_case['Test Case Title']}\n"
+                f"Requirements: {test_case['Requirements']}\n"
+                f"Summary: {test_case['Summary']}\n"
+                f"Preconditions: {test_case['preconditions']}\n"
+                f"Keywords: {test_case['Keywords']}\n"
+                f"Status: {status_key}\n"
+                f"Importance: {importance_key}\n"
+                f"Execution Type: {exec_type_key}\n"
+                f"Execution Time: {test_case['exec_time']}\n"
+                f"Expected Output: {test_case['Expected Output']}\n"
+                f"Steps Data: {test_case['Steps Data']}\n"
+                + "-" * 40
+            )
 
             # Upload to TestLink
             self.upload_test_case_to_testlink(test_case)
         return test_case_data
 
-    def upload_test_case_to_testlink(self,test_case):
+    def upload_test_case_to_testlink(self, test_case):
         suite_id = self.get_or_create_test_suite(test_case['Category'])
         project_id = self.get_project_id(inputs.PROJECT_NAME)
-        executiontype = test_case['exec_type']
-        case_name = f"{test_case['Test Case ID']}"
-        summary = f"{test_case['Description']}: {test_case['summary']}"
+        case_name = test_case['Test Case Title']
+        summary = f"{test_case['Summary']}"
         preconditions = test_case['preconditions']
         status = test_case['status']
-        imp = test_case['importance']
+        importance = test_case['importance']
         time = test_case['exec_time']
+        TC_execution_type = test_case['TC_exec_type']
         expected_results = test_case['Expected Output']
         steps_list = test_case['Steps Data']
         keywords_list = test_case['Keywords'].split(",") if test_case['Keywords'] else []
 
         # Check if the test case already exists
         if self.test_case_exists(case_name, suite_id):
-            print(f"Test case '{case_name}' already exists in suite '{test_case['Category']}'. Skipping creation.")
+            self.logger.info(f"Test case '{case_name}' already exists in suite '{test_case['Category']}'. Skipping creation.")
             return
 
         try:
@@ -134,36 +151,29 @@ class Test:
                 summary=summary,
                 preconditions=preconditions,
                 status=status,
-                importance=imp,
+                importance=importance,
                 estimatedexecduration=time,
-                executiontype=executiontype,
+                executiontype=TC_execution_type,
                 steps=steps_list,
                 expectedresults=expected_results
             )
-            print(f"Test case '{case_name}' created successfully.\n")
+            print(f"Test case '{case_name}' created successfully.")
 
             test_case_id = test_case_response[0]['id']
             details_of_testcase = self.tlc.getTestCaseIDByName(case_name)
             test_id = details_of_testcase[0]["id"]
-
             tc_full_ext_id = self.tlc.getTestCase(testcaseid=test_id)[0]["full_tc_external_id"]
 
-
             if keywords_list:
-                if isinstance(keywords_list, str):
-                    keywords = [keyword.strip() for keyword in keywords_list.split(",") if keyword.strip()]
-                else:
-                    keywords = [keyword.strip() for keyword in keywords_list if keyword.strip()]
-            else:
-                keywords = []
-
-            #Adding the keywords to the TestLink API
-            response_keyw = self.tlc.addTestCaseKeywords({tc_full_ext_id: keywords})
-            print("Keywords added:", response_keyw)
-
+                keywords = [keyword.strip() for keyword in keywords_list if keyword.strip()]
+                response_keyw = self.tlc.addTestCaseKeywords({tc_full_ext_id: keywords})
+                self.logger.info(f"Keywords added to test case {case_name}:", response_keyw)
+                print("keywords added successfully...........\n")
 
         except Exception as e:
             print(f"Error creating test case '{case_name}': {str(e)}")
+
+
 
 
     def test_case_exists(self,test_case_name, suite_id):
@@ -185,7 +195,7 @@ class Test:
 
 
     def get_or_create_test_suite(self,suite_name):
-        project_id = self.get_project_id(inputs.PROJECT_NAME)
+        project_id = self.get_project_id("PCI")
         suites = self.tlc.getFirstLevelTestSuitesForTestProject(project_id)
         for suite in suites:
             if suite["name"] == suite_name:

@@ -1,13 +1,15 @@
 from testlink import TestlinkAPIClient
 from Utils.Inputs.Common_inputs import inputs
-from Core.Creations.import_flags import Test
-
+from Core.Creations.import_TestCases import Test
+from Utils.Logger.log import get_logger
+import os
 
 class TestLinkManager:
     def __init__(self):
-        # Initialize TestLink API client and create an instance of the Test class
         self.tlc = TestlinkAPIClient(inputs.API_URL, inputs.KEY)
-        self.test = Test()  # Creating an instance of Test class
+        self.test = Test()
+        self.logger = get_logger()
+
 
     def get_project_id(self, project_name):
         try:
@@ -17,9 +19,7 @@ class TestLinkManager:
             return None
 
     def delete_project(self, project_name):
-        """
-        Delete the project using its name. If the project is not found, it handles the error.
-        """
+
         # Retrieve project ID based on project name
         project_id = self.get_project_id(project_name)
 
@@ -28,15 +28,19 @@ class TestLinkManager:
             return
 
         try:
-            # Call TestLink API to delete the project
-            response = self.tlc.deleteTestProject(inputs.PROJECT_PREFIX)  # Use project_id here
-            print(f"Project '{project_name}' deleted successfully.")
+            response = self.tlc.deleteTestProject(inputs.PROJECT_PREFIX)
+            self.logger.info(f"Project '{project_name}' deleted successfully.")
         except Exception as e:
-            print(f"Error deleting project '{project_name}': {str(e)}")
+            self.logger.info(f"Error deleting project '{project_name}': {str(e)}")
 
+    def delete_log_file(self):
+        log_file = os.path.join(inputs.LOG_PATH, "output.log")
+        if os.path.exists(log_file):
+            os.remove(log_file)
+        print("deleted the log file....................")
 
 if __name__ == '__main__':
-    # Initialize TestLinkManager and delete the project
     tlm = TestLinkManager()
-    project_name = inputs.PROJECT_NAME  # Replace with the actual project name
+    project_name = inputs.PROJECT_NAME
     tlm.delete_project(project_name)
+    tlm.delete_log_file()
