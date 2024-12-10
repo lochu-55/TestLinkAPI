@@ -119,7 +119,19 @@ To access the database used by TestLink:
    
 
 ---
+### Exporting the Test Cases
+Follow these steps to export test cases from TestLink:
+1. **Navigate to the TestLinkAPI/Export directory:**
+   ```bash
+   cd TestLinkAPI/Export
 
+2. **Run the export script using Python 3:**
+   ```bash
+   python3 Core/Creation/export_excel.py
+   
+3. The exported Excel file, `test_cases.xlsx`, will be saved in the `Excelsheet` folder.
+
+---
 ## Notes
 
 - Ensure Docker containers for TestLink and its database are running before executing the framework.
