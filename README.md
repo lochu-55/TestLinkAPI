@@ -3,6 +3,36 @@
 This framework automates the process of importing test cases into TestLink.
 
 ---
+# TestLink v1.9.19 Setup and Test Case Import
+
+The configuration and Docker files have been pushed to the following repository:  
+[https://github.com/lochu-55/testlink_1.9.19](https://github.com/lochu-55/testlink_1.9.19)
+
+## Installing TestLink v1.9.19 Using Docker
+
+### Installation Steps
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/lochu-55/testlink_1.9.19.git
+   cd testlink_1.9.19
+
+2. **Build and install TestLink using Docker Compose**
+   Run the following commands in your terminal:
+   ```bash
+   docker-compose --env-file ./envs/testlink-1.9.19.env -f docker-compose.yml -f docker-        compose.build.yml build tl_code
+   docker-compose --env-file ./envs/testlink-1.9.19.env -f docker-compose.yml -f docker-compose.build.yml build tl_pg tl_apache
+   docker-compose --env-file ./envs/testlink-1.9.19.env -f docker-compose.yml up -d
+
+3. **Access Testlink**
+   Open the following URL in your browser:
+   ```bash
+   https://localhost:8085
+   
+4. **Login Credentials:**
+    - **Username:** admin
+    - **Password:** admin
+
 
 ## Prerequisites
 
