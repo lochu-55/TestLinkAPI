@@ -1,0 +1,124 @@
+2024-12-10 13:29:46,365 - INFO - TestLink API Client initialized successfully.
+2024-12-10 13:29:46,995 - INFO - Fetched 1 projects.
+2024-12-10 13:29:46,995 - INFO - Successfully fetched projects from TestLink.
+2024-12-10 13:29:46,995 - INFO -    Project  : PCI
+2024-12-10 13:29:47,175 - INFO -       Fetched 6 requirements for project PCI.
+2024-12-10 13:29:47,315 - INFO -       Fetched 1 test plans for project PCI.
+2024-12-10 13:29:47,432 - INFO -       Fetched 4 test suites for plan 8676.
+2024-12-10 13:29:47,596 - INFO -       Fetched 4 test cases for plan 8676.
+2024-12-10 13:29:47,716 - INFO -       Fetched details for test case 8697.
+2024-12-10 13:29:47,919 - INFO -       Fetched keywords for test case 8697: sanity, smoke
+2024-12-10 13:29:47,919 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:47,920 - INFO -       Test case status: Draft
+2024-12-10 13:29:47,920 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:47,920 - INFO -       Test case importance: High
+2024-12-10 13:29:47,920 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:48,169 - INFO -       Fetched details for test case 8711.
+2024-12-10 13:29:48,411 - INFO -       Fetched keywords for test case 8711: Basic Functional
+2024-12-10 13:29:48,411 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:48,411 - INFO -       Test case status: Obsolete
+2024-12-10 13:29:48,412 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:48,412 - INFO -       Test case importance: High
+2024-12-10 13:29:48,412 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:48,412 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:48,613 - INFO -       Fetched details for test case 8707.
+2024-12-10 13:29:48,715 - INFO -       Fetched keywords for test case 8707: regression
+2024-12-10 13:29:48,715 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:48,715 - INFO -       Test case status: Rework
+2024-12-10 13:29:48,716 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:48,716 - INFO -       Test case importance: Low
+2024-12-10 13:29:48,818 - INFO -       Fetched details for test case 8702.
+2024-12-10 13:29:48,915 - INFO -       Fetched keywords for test case 8702: performance
+2024-12-10 13:29:48,916 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:48,916 - INFO -       Test case status: Future
+2024-12-10 13:29:48,916 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:48,916 - INFO -       Test case importance: Medium
+2024-12-10 13:29:48,917 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:49,029 - INFO -       Fetched 4 test cases for plan 8676.
+2024-12-10 13:29:49,135 - INFO -       Fetched details for test case 8697.
+2024-12-10 13:29:49,238 - INFO -       Fetched keywords for test case 8697: sanity, smoke
+2024-12-10 13:29:49,239 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:49,239 - INFO -       Test case status: Draft
+2024-12-10 13:29:49,239 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:49,239 - INFO -       Test case importance: High
+2024-12-10 13:29:49,239 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:49,340 - INFO -       Fetched details for test case 8711.
+2024-12-10 13:29:49,442 - INFO -       Fetched keywords for test case 8711: Basic Functional
+2024-12-10 13:29:49,443 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:49,443 - INFO -       Test case status: Obsolete
+2024-12-10 13:29:49,443 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:49,443 - INFO -       Test case importance: High
+2024-12-10 13:29:49,444 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:49,444 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:49,541 - INFO -       Fetched details for test case 8707.
+2024-12-10 13:29:49,640 - INFO -       Fetched keywords for test case 8707: regression
+2024-12-10 13:29:49,640 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:49,641 - INFO -       Test case status: Rework
+2024-12-10 13:29:49,641 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:49,641 - INFO -       Test case importance: Low
+2024-12-10 13:29:49,743 - INFO -       Fetched details for test case 8702.
+2024-12-10 13:29:49,855 - INFO -       Fetched keywords for test case 8702: performance
+2024-12-10 13:29:49,855 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:49,856 - INFO -       Test case status: Future
+2024-12-10 13:29:49,856 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:49,856 - INFO -       Test case importance: Medium
+2024-12-10 13:29:49,856 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:49,993 - INFO -       Fetched 4 test cases for plan 8676.
+2024-12-10 13:29:50,105 - INFO -       Fetched details for test case 8697.
+2024-12-10 13:29:50,231 - INFO -       Fetched keywords for test case 8697: sanity, smoke
+2024-12-10 13:29:50,232 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:50,232 - INFO -       Test case status: Draft
+2024-12-10 13:29:50,232 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:50,233 - INFO -       Test case importance: High
+2024-12-10 13:29:50,233 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:50,384 - INFO -       Fetched details for test case 8711.
+2024-12-10 13:29:50,574 - INFO -       Fetched keywords for test case 8711: Basic Functional
+2024-12-10 13:29:50,574 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:50,574 - INFO -       Test case status: Obsolete
+2024-12-10 13:29:50,575 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:50,575 - INFO -       Test case importance: High
+2024-12-10 13:29:50,575 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:50,575 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:50,764 - INFO -       Fetched details for test case 8707.
+2024-12-10 13:29:50,912 - INFO -       Fetched keywords for test case 8707: regression
+2024-12-10 13:29:50,912 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:50,912 - INFO -       Test case status: Rework
+2024-12-10 13:29:50,912 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:50,912 - INFO -       Test case importance: Low
+2024-12-10 13:29:51,009 - INFO -       Fetched details for test case 8702.
+2024-12-10 13:29:51,106 - INFO -       Fetched keywords for test case 8702: performance
+2024-12-10 13:29:51,106 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:51,107 - INFO -       Test case status: Future
+2024-12-10 13:29:51,107 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:51,107 - INFO -       Test case importance: Medium
+2024-12-10 13:29:51,107 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:51,217 - INFO -       Fetched 4 test cases for plan 8676.
+2024-12-10 13:29:51,312 - INFO -       Fetched details for test case 8697.
+2024-12-10 13:29:51,412 - INFO -       Fetched keywords for test case 8697: sanity, smoke
+2024-12-10 13:29:51,413 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:51,413 - INFO -       Test case status: Draft
+2024-12-10 13:29:51,413 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:51,413 - INFO -       Test case importance: High
+2024-12-10 13:29:51,414 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:51,508 - INFO -       Fetched details for test case 8711.
+2024-12-10 13:29:51,630 - INFO -       Fetched keywords for test case 8711: Basic Functional
+2024-12-10 13:29:51,630 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:51,631 - INFO -       Test case status: Obsolete
+2024-12-10 13:29:51,631 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:51,631 - INFO -       Test case importance: High
+2024-12-10 13:29:51,632 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:51,632 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:51,782 - INFO -       Fetched details for test case 8707.
+2024-12-10 13:29:51,917 - INFO -       Fetched keywords for test case 8707: regression
+2024-12-10 13:29:51,917 - INFO -       Test case execution type: Automated
+2024-12-10 13:29:51,917 - INFO -       Test case status: Rework
+2024-12-10 13:29:51,918 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:51,918 - INFO -       Test case importance: Low
+2024-12-10 13:29:52,023 - INFO -       Fetched details for test case 8702.
+2024-12-10 13:29:52,136 - INFO -       Fetched keywords for test case 8702: performance
+2024-12-10 13:29:52,136 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:52,137 - INFO -       Test case status: Future
+2024-12-10 13:29:52,137 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:52,137 - INFO -       Test case importance: Medium
+2024-12-10 13:29:52,137 - INFO -       Test case execution type: Manual
+2024-12-10 13:29:54,615 - INFO - Data successfully exported to Excelsheet/test_cases.xlsx

@@ -3,7 +3,7 @@ import logging
 
 open('Utils/testlink_export.log', 'w').close()
 # Set up logging
-logging.basicConfig(filename='testlink_export.log',level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='Utils/testlink_export.log',level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.DEBUG)

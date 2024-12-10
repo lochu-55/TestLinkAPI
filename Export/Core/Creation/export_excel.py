@@ -171,9 +171,9 @@ class ExportToExcel:
 
 if __name__ == "__main__":
     # URL and API key for TestLink
-    url = "http://172.17.17.93:8085/lib/api/xmlrpc/v1/xmlrpc.php"
-    api_key = "6e6ac11d3cd05d79f5d2d07e7338e0c0"
-    #api_key = "10b2132073a17c9d4a0bc700dd778f83"
+    url = "http://172.17.17.8:8085/lib/api/xmlrpc/v1/xmlrpc.php"
+    #api_key = "6e6ac11d3cd05d79f5d2d07e7338e0c0"
+    api_key = "10b2132073a17c9d4a0bc700dd778f83"
     # Create an instance of TestLinkManager
     testlink_manager = TestLinkManager(url, api_key)
 
