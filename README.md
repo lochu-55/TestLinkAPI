@@ -96,26 +96,17 @@ Update the configuration file `Import_TestCases/Utils/Inputs/Common_inputs.py` w
 
 To access the database used by TestLink:
 
-1. **Access the PostgreSQL Container:**
-    ```bash
-    docker exec -it testlink_pg_1.9.19 bash
-    ```
-    Inside the container, use the following command to connect:
-    ```bash
-    psql -h tl_pg -U tlink -d testlink-1.9.19
-    ```
-
-2. **Find the Container's IP Address:**
-    Run the following command:
-    ```bash
-    docker inspect testlink_pg_1.9.19 | grep -i ipaddress
-    ```
+1. **Access the IP Address of postgresql Container:**
+   ```bash
+   docker inspect testlink_pg_1.9.19 | grep IPAddress
+   ``` 
+    
     Example output:
     ```json
     "IPAddress": "172.21.0.2",
     ```
 
-3. Replace the value of variable named **host** in class **DB** present in **"Utils/Inputs/Common_inputs"** with above retreived IPAddress
+2. Replace the value of variable named **host** in class **DB** present in **"Utils/Inputs/Common_inputs"** with above retreived IPAddress
    
 
 ---
