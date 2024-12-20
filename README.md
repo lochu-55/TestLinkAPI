@@ -60,7 +60,7 @@ The configuration and Docker files have been pushed to the following repository:
 ## Usage
 
 
-### **README: Preparing Test Case File for TestLink Import**
+### **Preparing Test Case File for TestLink Import**
 
 Here is the structure of the Excel file to ensure compatibility with TestLink’s import functionality.
 
