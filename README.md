@@ -59,6 +59,52 @@ The configuration and Docker files have been pushed to the following repository:
 
 ## Usage
 
+
+### **README: Preparing Test Case File for TestLink Import**
+
+Here is the structure of the Excel file to ensure compatibility with TestLink’s import functionality.
+
+---
+
+#### **File Requirements**
+1. **File Format**: The file must be in `.xlsx` format (e.g., `NVME.xlsx`).
+2. **Sheet Structure**: The Excel sheet must include the following columns **in the exact order**:
+
+---
+
+#### **Column Description**
+| **Column Name**          | **Description**                                                                                 | **Example Data**                      |
+|--------------------------|-----------------------------------------------------------------------------------------------|---------------------------------------|
+| **Test Suite**           | The category or module of the test case.                                                       | Basic Functionality Tests             |
+| **Test Case Title**      | A descriptive title for the test case.                                                         | Device Detection and Initialization   |
+| **Requirements**         | The associated requirement IDs or references.                                                  | use-case-01, feature-01               |
+| **Summary**              | A brief description of the test case objective.                                                | Verify NVMe device initialization.    |
+| **Preconditions**        | Any prerequisites required before executing the test case.                                      | Power on the system.                  |
+| **Steps_actions**        | Step-by-step instructions for performing the test.                                              | 1. Launch VM; 2. Check dmesg output.  |
+| **Keywords**             | Tags or labels for categorizing the test (e.g., regression, performance, smoke).                | Smoke, Sanity                         |
+| **Status**               | The current state of the test case (e.g., Draft, Future, Rework, Obsolete).                     | Draft                                 |
+| **Importance**           | The priority of the test case (e.g., High, Medium, Low).                                        | High                                  |
+| **TestCase_execution_type** | The type of execution (e.g., Automated, Manual).                                               | Automated                             |
+| **Exec time**            | Estimated time to complete the test case (in seconds).                                          | 100                                   |
+| **Expected_results**     | The expected outcome or behavior for each step.                                                 | The VM should launch without errors.  |
+| **Step_execution_type**  | Specifies whether each step is Manual or Automated.                                             | Manual/Automated                      |
+
+---
+
+#### **Example of Correct Format**
+
+| **Test Suite**            | **Test Case Title**              | **Requirements**        | **Summary**                                                     | **Preconditions**         | **Steps_actions**                                | **Keywords**        | **Status**   | **Importance** | **TestCase_execution_type** | **Exec time** | **Expected_results**                         | **Step_execution_type** |
+|---------------------------|----------------------------------|-------------------------|-----------------------------------------------------------------|---------------------------|------------------------------------------------|---------------------|--------------|----------------|-----------------------------|---------------|-----------------------------------------------|-------------------------|
+| Basic Functionality Tests | Device Detection and Initialization | use-case-01             | Verify that the NVMe device initializes correctly.              | Power on system           | 1. Launch VM; 2. Check dmesg output.           | Smoke, Sanity       | Draft        | High           | Automated                   | 100           | The VM should launch without errors.         | Automated              |
+| Performance Tests         | Random Read Operation           | use-case-01, feature-01 | Verify that driver handles random read operations.              | Power on system           | 1. Perform random read operation using fio.    | Performance         | Future       | Medium         | Manual                      | 180           | The code should run without errors.          | Manual                 |
+| Regression Tests          | Previous Versions               | none-function-01        | Ensure that updates do not introduce new bugs.                  | Reset                     | 1. Check driver compatibility with old versions. | Regression          | Rework       | Low            | Manual                      | 80            | The driver should work fine.                 | Automated              |
+| PCIe Interface Tests      | PCIe Device Enumeration         | restriction-01          | Ensure NVMe device is correctly enumerated on PCI bus.          | Reboot                    | 1. Check PCI devices with lspci.               | Basic Functional    | Obsolete     | High           | Automated                   | 60            | NVMe device should be listed correctly.      | Manual/Automated       |
+
+
+---
+
+
+
 ### Configure the Framework
 
 Update the configuration file `Import_TestCases/Utils/Inputs/Common_inputs.py` with your required values and paths:
