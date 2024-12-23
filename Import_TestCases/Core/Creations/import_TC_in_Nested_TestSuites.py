@@ -196,7 +196,7 @@ class Test:
         suite_parts = suite_name.split(' > ')
         parent_suite_name = suite_parts[0].strip()  # Parent Suite
         nested_suite_name = suite_parts[1].strip() if len(suite_parts) > 1 else nested_suite_name
-        print("nneeeeeeeeeeeeeeeee",nested_suite_name)
+        print("Nested Suite name is : ",nested_suite_name)
 
         # Get the parent suite ID from TestLink
         parent_suite_id = None
@@ -218,7 +218,7 @@ class Test:
             # Debug nested suites
             print(f"Fetching nested suites under Parent Suite ID: {parent_suite_id}")
             nested_suites = self.tlc.getTestSuitesForTestSuite(parent_suite_id)
-            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",nested_suites)
+            print("The nested suites are ---------->",nested_suites)
             if isinstance(nested_suites, dict):
                 if "id" in nested_suites and "name" in nested_suites:
                     if nested_suites["name"] == nested_suite_name:
