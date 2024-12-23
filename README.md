@@ -1,4 +1,4 @@
-# TestLink API Framework
+![image](https://github.com/user-attachments/assets/83f106fd-5368-4ca7-be53-335727b1fa98)# TestLink API Framework
 
 This framework automates the process of importing test cases into TestLink.
 
@@ -96,6 +96,7 @@ Here is the structure of the Excel file to ensure compatibility with TestLink’
 | **Test Suite**            | **Test Case Title**              | **Requirements**        | **Summary**                                                     | **Preconditions**         | **Steps_actions**                                | **Keywords**        | **Status**   | **Importance** | **TestCase_execution_type** | **Exec time** | **Expected_results**                         | **Step_execution_type** |
 |---------------------------|----------------------------------|-------------------------|-----------------------------------------------------------------|---------------------------|------------------------------------------------|---------------------|--------------|----------------|-----------------------------|---------------|-----------------------------------------------|-------------------------|
 | Basic Functionality Tests | Device Detection and Initialization | use-case-01             | Verify that the NVMe device initializes correctly.              | Power on system           | 1. Launch VM; 2. Check dmesg output.           | Smoke, Sanity       | Draft        | High           | Automated                   | 100           | The VM should launch without errors.         | Automated              |
+| Basic Functionality Tests | SCP loading | feature-01             | verify that driver loading.              | Power on system           | 1. Launch VM; 2. Check dmesg output.           | Smoke, Sanity       | Draft        | High           | Automated                   | 100           | The VM should launch without errors.         | Automated              |
 | Performance Tests         | Random Read Operation           | use-case-01, feature-01 | Verify that driver handles random read operations.              | Power on system           | 1. Perform random read operation using fio.    | Performance         | Future       | Medium         | Manual                      | 180           | The code should run without errors.          | Manual                 |
 
 ---
