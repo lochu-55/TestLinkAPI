@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/83f106fd-5368-4ca7-be53-335727b1fa98)# TestLink API Framework
+# TestLink API Framework
 
 This framework automates the process of importing test cases into TestLink.
 
