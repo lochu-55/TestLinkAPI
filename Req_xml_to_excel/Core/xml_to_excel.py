@@ -11,7 +11,7 @@ class XMLToExcelConverter:
     @staticmethod
     def remove_html_tags(text):
         if text:
-            return re.sub(r'<[^>]*>', '', text)  # Removes everything between < and >
+            return re.sub(r'<[^>]*>', '', text)
         return text
 
     @staticmethod
@@ -21,7 +21,7 @@ class XMLToExcelConverter:
             "2": "User Requirement Specification",
             "3": "System Requirement Specification",
         }
-        return type_mapping.get(req_type, "Unknown Type")  # Default to "Unknown Type" if the key isn't found
+        return type_mapping.get(req_type, "Unknown Type")
 
     @staticmethod
     def map_requirement_status(status):
@@ -35,7 +35,7 @@ class XMLToExcelConverter:
             "N": "Not Testable",
             "O": "Obsolete",
         }
-        return status_mapping.get(status, "Unknown Status")  # Default to "Unknown Status" if the key isn't found
+        return status_mapping.get(status, "Unknown Status")
 
     @staticmethod
     def map_requirement_type(req_type):
@@ -48,19 +48,16 @@ class XMLToExcelConverter:
             "6": "Constraint",
             "7": "System Function",
         }
-        return type_mapping.get(req_type, "Unknown Type")  # Default to "Unknown Type" if the key isn't found
+        return type_mapping.get(req_type, "Unknown Type")
 
     def parse_and_convert(self):
         # Parse the XML file
         tree = ET.parse(self.xml_file)
         root = tree.getroot()
 
-        # Prepare the data to be added to the DataFrame
         data = []
 
-        # Traverse through each <req_spec> element
         for req_spec in root.findall(".//req_spec"):
-            # Extract basic metadata from <req_spec>
             req_spec_data = {
                 "req_spec_title": req_spec.get("title"),
                 "req_spec_doc_id": req_spec.get("doc_id"),
@@ -71,10 +68,8 @@ class XMLToExcelConverter:
                 else None,
             }
 
-            # First requirement flag
             first_requirement = True
 
-            # Traverse through each <requirement> element inside <req_spec>
             for requirement in req_spec.findall(".//requirement"):
                 req_data = req_spec_data.copy() if first_requirement else {
                     "req_spec_title": None,
@@ -106,17 +101,14 @@ class XMLToExcelConverter:
                 data.append(req_data)
                 first_requirement = False
 
-        # Convert the list of data into a DataFrame
         df = pd.DataFrame(data)
 
-        # Save the DataFrame to an Excel file
         df.to_excel(self.excel_file, index=False)
         print(f"XML data is Converted to Excel and  data saved to {self.excel_file}")
 
 
-# Example usage
 if __name__ == "__main__":
-    xml_file = 'Input_Req.xml'  # Replace with your XML file path
-    excel_file = 'Output_Req.xlsx'  # Replace with the desired output Excel file name
+    xml_file = 'Input_Req.xml'
+    excel_file = 'Output_Req.xlsx'
     converter = XMLToExcelConverter(xml_file, excel_file)
     converter.parse_and_convert()
