@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<requirement-specification>
+<req_spec title="Linux"  doc_id="req-spec-01"  >
+	<revision><![CDATA[1]]></revision>
+	<type><![CDATA[1]]></type>
+	<node_order><![CDATA[0]]></node_order>
+	<total_req><![CDATA[0]]></total_req>
+	<scope><![CDATA[<![CDATA[<p>a section</p>]]></scope>
+			<requirement>
+		<docid><![CDATA[use-case-01]]></docid>
+		<title><![CDATA[use case req]]></title>
+		<version>1</version>
+		<revision>1</revision>
+		<node_order>0</node_order>
+		<description><![CDATA[<![CDATA[<p>a section</p>]]></description>
+		<status><![CDATA[R]]></status>
+		<type><![CDATA[2]]></type>
+		<expected_coverage><![CDATA[1]]></expected_coverage>
+		
+	</requirement>
+	<requirement>
+		<docid><![CDATA[none-function-01]]></docid>
+		<title><![CDATA[none function requirement]]></title>
+		<version>1</version>
+		<revision>1</revision>
+		<node_order>0</node_order>
+		<description><![CDATA[<![CDATA[<p>a section</p>]]></description>
+		<status><![CDATA[D]]></status>
+		<type><![CDATA[3]]></type>
+		<expected_coverage><![CDATA[2]]></expected_coverage>
+		
+	</requirement>
+</req_spec>
+<req_spec title="Ubuntu"  doc_id="req-spec-02"  >
+	<revision><![CDATA[1]]></revision>
+	<type><![CDATA[2]]></type>
+	<node_order><![CDATA[0]]></node_order>
+	<total_req><![CDATA[0]]></total_req>
+	<scope><![CDATA[<![CDATA[<p>a user requirement</p>]]></scope>
+			<requirement>
+		<docid><![CDATA[restriction-01]]></docid>
+		<title><![CDATA[restriction req]]></title>
+		<version>1</version>
+		<revision>1</revision>
+		<node_order>0</node_order>
+		<description><![CDATA[<![CDATA[<p>a user requirement</p>]]></description>
+		<status><![CDATA[W]]></status>
+		<type><![CDATA[6]]></type>
+		<expected_coverage><![CDATA[2]]></expected_coverage>
+		
+	</requirement>
+	<requirement>
+		<docid><![CDATA[user-gui-01]]></docid>
+		<title><![CDATA[user gui requirement]]></title>
+		<version>1</version>
+		<revision>1</revision>
+		<node_order>0</node_order>
+		<description><![CDATA[<![CDATA[<p>a user requirement</p>]]></description>
+		<status><![CDATA[F]]></status>
+		<type><![CDATA[7]]></type>
+		<expected_coverage><![CDATA[1]]></expected_coverage>
+		
+	</requirement>
+	<requirement>
+		<docid><![CDATA[doc1]]></docid>
+		<title><![CDATA[temp]]></title>
+		<version>1</version>
+		<revision>1</revision>
+		<node_order>1</node_order>
+		<description><![CDATA[]]></description>
+		<status><![CDATA[D]]></status>
+		<type><![CDATA[3]]></type>
+		<expected_coverage><![CDATA[1]]></expected_coverage>
+		
+	</requirement>
+</req_spec>
+<req_spec title="Debian"  doc_id="rec-spec-03"  >
+	<revision><![CDATA[1]]></revision>
+	<type><![CDATA[3]]></type>
+	<node_order><![CDATA[0]]></node_order>
+	<total_req><![CDATA[0]]></total_req>
+	<scope><![CDATA[<![CDATA[<p>a system requirement</p>]]></scope>
+			<requirement>
+		<docid><![CDATA[system-func-01]]></docid>
+		<title><![CDATA[system function Req]]></title>
+		<version>1</version>
+		<revision>1</revision>
+		<node_order>0</node_order>
+		<description><![CDATA[<![CDATA[<p>a system requirement</p>]]></description>
+		<status><![CDATA[I]]></status>
+		<type><![CDATA[1]]></type>
+		<expected_coverage><![CDATA[3]]></expected_coverage>
+		
+	</requirement>
+	<requirement>
+		<docid><![CDATA[feature-01]]></docid>
+		<title><![CDATA[feature requirement]]></title>
+		<version>1</version>
+		<revision>1</revision>
+		<node_order>0</node_order>
+		<description><![CDATA[<![CDATA[<p>a system requirement</p>]]></description>
+		<status><![CDATA[O]]></status>
+		<type><![CDATA[5]]></type>
+		<expected_coverage><![CDATA[3]]></expected_coverage>
+		
+	</requirement>
+</req_spec>
+</requirement-specification>
