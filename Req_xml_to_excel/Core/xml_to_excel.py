@@ -7,11 +7,12 @@ class XMLToExcelConverter:
     def __init__(self, xml_file, excel_file):
         self.xml_file = xml_file
         self.excel_file = excel_file
+        self.processed_specs = set()  # To track processed specifications
 
     @staticmethod
     def remove_html_tags(text):
         if text:
-            return re.sub(r'<[^>]*>', '', text)
+            return re.sub(r"<[^>]*>", "", text)
         return text
 
     @staticmethod
@@ -22,20 +23,6 @@ class XMLToExcelConverter:
             "3": "System Requirement Specification",
         }
         return type_mapping.get(req_type, "Unknown Type")
-
-    @staticmethod
-    def map_requirement_status(status):
-        status_mapping = {
-            "D": "Draft",
-            "R": "Review",
-            "W": "Rework",
-            "F": "Finished",
-            "I": "Implemented",
-            "V": "Valid",
-            "N": "Not Testable",
-            "O": "Obsolete",
-        }
-        return status_mapping.get(status, "Unknown Status")
 
     @staticmethod
     def map_requirement_type(req_type):
@@ -50,6 +37,73 @@ class XMLToExcelConverter:
         }
         return type_mapping.get(req_type, "Unknown Type")
 
+    def parse_requirements(self, req_spec, parent_data, data):
+        for requirement in req_spec.findall(".//requirement"):
+            req_data = {
+                **parent_data,
+                #"Req Spec Doc ID": "",
+                "Spec Revision": "",
+                "Spec Type": "",
+                "Scope": "",
+                "Requirement Doc ID": requirement.find("docid").text,
+                "Requirement Title": requirement.find("title").text,
+                "Requirement Version": requirement.find("version").text,
+                "Requirement Revision": requirement.find("revision").text,
+                "Requirement Description": self.remove_html_tags(
+                    requirement.find("description").text
+                ),
+                "Requirement Type": self.map_requirement_type(
+                    requirement.find("type").text
+                ),
+                "Expected Coverage": requirement.find("expected_coverage").text,
+            }
+            data.append(req_data)
+
+    def parse_specifications(self, req_spec, parent_data, data, level=1):
+        doc_id = req_spec.get("doc_id")
+        if doc_id in self.processed_specs:
+            return  # Skip already processed specifications
+        self.processed_specs.add(doc_id)
+
+        # Extract additional fields
+        revision = req_spec.find("revision").text if req_spec.find("revision") is not None else None
+        scope = self.remove_html_tags(req_spec.find("scope").text) if req_spec.find("scope") is not None else None
+        spec_type = self.map_req_spec_type(req_spec.find("type").text)
+
+        # Add fields to parent data
+        parent_data[f"Sub Spec Level {level} Title"] = req_spec.get("title")
+        parent_data[f"Sub Spec Level {level} Doc ID"] = doc_id
+        #parent_data[f"Sub Spec Level {level} Revision"] = revision
+        #parent_data[f"Sub Spec Level {level} Scope"] = scope
+        #parent_data[f"Sub Spec Level {level} Spec Type"] = spec_type
+
+        # Prepare the spec data
+        spec_data = {
+            **parent_data,
+            #"Req Spec Doc ID": doc_id,
+            "Spec Revision": revision,
+            "Spec Type": spec_type,
+            "Scope": scope,
+            "Requirement Doc ID": None,
+            "Requirement Title": None,
+            "Requirement Version": None,
+            "Requirement Revision": None,
+            "Requirement Description": None,
+            "Requirement Type": None,
+            "Expected Coverage": None,
+        }
+
+        # Add the specification data
+        data.append(spec_data)
+
+        # Parse requirements under the current specification
+        self.parse_requirements(req_spec, parent_data, data)
+
+        # Parse nested specifications
+        nested_specs = req_spec.findall("req_spec")
+        for nested_spec in nested_specs:
+            self.parse_specifications(nested_spec, parent_data.copy(), data, level + 1)
+
     def parse_and_convert(self):
         # Parse the XML file
         tree = ET.parse(self.xml_file)
@@ -57,58 +111,48 @@ class XMLToExcelConverter:
 
         data = []
 
-        for req_spec in root.findall(".//req_spec"):
-            req_spec_data = {
-                "req_spec_title": req_spec.get("title"),
-                "req_spec_doc_id": req_spec.get("doc_id"),
-                "req_spec_revision": req_spec.find("revision").text,
-                "req_spec_type": self.map_req_spec_type(req_spec.find("type").text),
-                "req_spec_scope": self.remove_html_tags(req_spec.find("scope").text)
-                if req_spec.find("scope") is not None
-                else None,
-            }
+        # Process top-level specifications
+        top_level_specs = root.findall(".//req_spec")
+        for req_spec in top_level_specs:
+            self.parse_specifications(req_spec, {}, data)
 
-            first_requirement = True
-
-            for requirement in req_spec.findall(".//requirement"):
-                req_data = req_spec_data.copy() if first_requirement else {
-                    "req_spec_title": None,
-                    "req_spec_doc_id": None,
-                    "req_spec_revision": None,
-                    "req_spec_type": None,
-                    "req_spec_scope": None,
-                }
-                req_data.update(
-                    {
-                        "requirement_docid": requirement.find("docid").text,
-                        "requirement_title": requirement.find("title").text,
-                        "requirement_version": requirement.find("version").text,
-                        "requirement_revision": requirement.find("revision").text,
-                        "requirement_description": self.remove_html_tags(
-                            requirement.find("description").text
-                        ),
-                        "requirement_status": self.map_requirement_status(
-                            requirement.find("status").text
-                        ),
-                        "requirement_type": self.map_requirement_type(
-                            requirement.find("type").text
-                        ),
-                        "requirement_expected_coverage": requirement.find(
-                            "expected_coverage"
-                        ).text,
-                    }
-                )
-                data.append(req_data)
-                first_requirement = False
-
+        # Create a DataFrame
         df = pd.DataFrame(data)
 
+        # Sort columns to ensure hierarchical order
+        sub_spec_columns = [col for col in df.columns if col.startswith("Sub Spec Level")]
+        sub_spec_columns.sort(key=lambda x: (int(re.search(r"\d+", x).group()), x))  # Sort by level
+
+        # Adjusted column order: Sub Spec columns come first, followed by Spec details
+        fixed_columns = [
+            "Spec Revision",
+            "Spec Type",
+            "Scope",
+        ]
+        requirement_columns = [
+            "Requirement Doc ID",
+            "Requirement Title",
+            "Requirement Version",
+            "Requirement Revision",
+            "Requirement Description",
+            "Requirement Type",
+            "Expected Coverage",
+        ]
+
+        # Finalize column order: Sub Spec columns first, then Spec details, and finally Requirement details
+        df = df[sub_spec_columns + fixed_columns + requirement_columns]
+
+        # Ensure hierarchical grouping for dynamically generated columns
+        for col in sub_spec_columns:
+            df[col] = df[col].mask(df[col].duplicated(), "")
+
+        # Save to Excel
         df.to_excel(self.excel_file, index=False)
-        print(f"XML data is Converted to Excel and  data saved to {self.excel_file}")
+        print(f"XML data is converted to Excel and saved to {self.excel_file}")
 
 
 if __name__ == "__main__":
-    xml_file = 'Input_Req.xml'
-    excel_file = 'Output_Req.xlsx'
+    xml_file = "Input.xml"  # Replace with your input XML file path
+    excel_file = "Output_Req.xlsx"  # Replace with your desired output Excel file path
     converter = XMLToExcelConverter(xml_file, excel_file)
     converter.parse_and_convert()
