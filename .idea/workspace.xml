@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8372b220-ba72-4344-8313-3bdced7d0cb0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Req_xml_to_excel/Core/xml_to_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Req_xml_to_excel/Core/xml_to_excel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Req_xml_to_excel/Input_Req.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -7,7 +7,7 @@ class XMLToExcelConverter:
     def __init__(self, xml_file, excel_file):
         self.xml_file = xml_file
         self.excel_file = excel_file
-        self.processed_specs = set()  # To track processed specifications
+        self.processed_specs = set()
 
     @staticmethod
     def remove_html_tags(text):
@@ -62,7 +62,7 @@ class XMLToExcelConverter:
     def parse_specifications(self, req_spec, parent_data, data, level=1):
         doc_id = req_spec.get("doc_id")
         if doc_id in self.processed_specs:
-            return  # Skip already processed specifications
+            return
         self.processed_specs.add(doc_id)
 
         # Extract additional fields
@@ -70,14 +70,12 @@ class XMLToExcelConverter:
         scope = self.remove_html_tags(req_spec.find("scope").text) if req_spec.find("scope") is not None else None
         spec_type = self.map_req_spec_type(req_spec.find("type").text)
 
-        # Add fields to parent data
         parent_data[f"Sub Spec Level {level} Title"] = req_spec.get("title")
         parent_data[f"Sub Spec Level {level} Doc ID"] = doc_id
         #parent_data[f"Sub Spec Level {level} Revision"] = revision
         #parent_data[f"Sub Spec Level {level} Scope"] = scope
         #parent_data[f"Sub Spec Level {level} Spec Type"] = spec_type
 
-        # Prepare the spec data
         spec_data = {
             **parent_data,
             #"Req Spec Doc ID": doc_id,
@@ -93,37 +91,29 @@ class XMLToExcelConverter:
             "Expected Coverage": None,
         }
 
-        # Add the specification data
         data.append(spec_data)
 
-        # Parse requirements under the current specification
         self.parse_requirements(req_spec, parent_data, data)
 
-        # Parse nested specifications
         nested_specs = req_spec.findall("req_spec")
         for nested_spec in nested_specs:
             self.parse_specifications(nested_spec, parent_data.copy(), data, level + 1)
 
     def parse_and_convert(self):
-        # Parse the XML file
         tree = ET.parse(self.xml_file)
         root = tree.getroot()
 
         data = []
 
-        # Process top-level specifications
         top_level_specs = root.findall(".//req_spec")
         for req_spec in top_level_specs:
             self.parse_specifications(req_spec, {}, data)
 
-        # Create a DataFrame
         df = pd.DataFrame(data)
 
-        # Sort columns to ensure hierarchical order
         sub_spec_columns = [col for col in df.columns if col.startswith("Sub Spec Level")]
         sub_spec_columns.sort(key=lambda x: (int(re.search(r"\d+", x).group()), x))  # Sort by level
 
-        # Adjusted column order: Sub Spec columns come first, followed by Spec details
         fixed_columns = [
             "Spec Revision",
             "Spec Type",
@@ -139,20 +129,17 @@ class XMLToExcelConverter:
             "Expected Coverage",
         ]
 
-        # Finalize column order: Sub Spec columns first, then Spec details, and finally Requirement details
         df = df[sub_spec_columns + fixed_columns + requirement_columns]
 
-        # Ensure hierarchical grouping for dynamically generated columns
         for col in sub_spec_columns:
             df[col] = df[col].mask(df[col].duplicated(), "")
 
-        # Save to Excel
         df.to_excel(self.excel_file, index=False)
         print(f"XML data is converted to Excel and saved to {self.excel_file}")
 
 
 if __name__ == "__main__":
-    xml_file = "Input.xml"  # Replace with your input XML file path
-    excel_file = "Output_Req.xlsx"  # Replace with your desired output Excel file path
+    xml_file = "Input.xml"
+    excel_file = "Output_Req.xlsx"  
     converter = XMLToExcelConverter(xml_file, excel_file)
     converter.parse_and_convert()
