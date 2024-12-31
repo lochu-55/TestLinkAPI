@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite id="" name="" >
+<node_order><![CDATA[]]></node_order>
+<details><![CDATA[]]></details> 
+<testsuite id="11251" name="suite-nvme" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Details of the Test Suite A]]></details> 
+<testsuite id="11252" name="nested_one" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Details of the Test Suite A]]></details> 
+<testsuite id="11417" name="suite 1.1.1" >
+<node_order><![CDATA[1]]></node_order>
+<details><![CDATA[<p>details</p>
+]]></details> 
+<keywords><keyword name="Stability"><notes><![CDATA[
+Description for the Stability keyword.
+]]></notes></keyword>
+</keywords>
+<testcase internalid="11418" name="test_01.1.1">
+	<node_order><![CDATA[1000]]></node_order>
+	<externalid><![CDATA[32]]></externalid>
+	<fullexternalid><![CDATA[pcie-32]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>summary</p>
+]]></summary>
+	<preconditions><![CDATA[]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+	<is_open>1</is_open>
+	<active>1</active>
+
+<keywords><keyword name="Stability"><notes><![CDATA[
+Description for the Stability keyword.
+]]></notes></keyword>
+</keywords></testcase>
+</testsuite>
+<testcase internalid="11407" name="test_01">
+	<node_order><![CDATA[1000]]></node_order>
+	<externalid><![CDATA[31]]></externalid>
+	<fullexternalid><![CDATA[pcie-31]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>summary&nbsp;</p>
+]]></summary>
+	<preconditions><![CDATA[<p>preconditions</p>
+]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration>3.00</estimated_exec_duration>
+	<status>7</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>step1</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>r1</p>
+]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<p>step2</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>r2</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+<keywords><keyword name="Basic Functional"><notes><![CDATA[
+Description for the Functional keyword.
+]]></notes></keyword>
+<keyword name="sanity"><notes><![CDATA[
+Description for the sanity keyword.
+]]></notes></keyword>
+<keyword name="performance"><notes><![CDATA[
+Description for the Performance keyword.
+]]></notes></keyword>
+<keyword name="regression"><notes><![CDATA[
+Discription for the regressiontest case
+]]></notes></keyword>
+<keyword name="Security"><notes><![CDATA[
+Description for the Security keyword.
+]]></notes></keyword>
+<keyword name="Stability"><notes><![CDATA[
+Description for the Stability keyword.
+]]></notes></keyword>
+<keyword name="smoke"><notes><![CDATA[
+Description for the smoke keyword.
+]]></notes></keyword>
+</keywords></testcase>
+</testsuite></testsuite><testsuite id="11271" name="Basic Functionality" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Imported test suite]]></details> 
+<testsuite id="11272" name="FVP" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Nested test suite]]></details> 
+
+<testcase internalid="11273" name="Device_testing">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[1]]></externalid>
+	<fullexternalid><![CDATA[pcie-1]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Updated summary for testing a device]]></summary>
+	<preconditions><![CDATA[System running Linux OS, root access]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>1.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Connect to vm]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Execute sudo modprobe i2c-dev]]></actions>
+	<expectedresults><![CDATA[Ensure that the i2c-dev module is loaded successfully without errors]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11277" name="Driver initialization :Load i2c_piix4 Module">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[2]]></externalid>
+	<fullexternalid><![CDATA[pcie-2]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that the i2c_piix4 module can be loaded]]></summary>
+	<preconditions><![CDATA[None	]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>2.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute sudo modprobe i2c_piix4]]></actions>
+	<expectedresults><![CDATA[Ensure that the i2c_piix4 module is loaded successfully]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11292" name="Write Data to I2C Device">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[6]]></externalid>
+	<fullexternalid><![CDATA[pcie-6]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify data is successfully written to device]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded, i2c_piix4 module loaded,I2C devices connected]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>6.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute i2cset -y <bus_number> <device_address> <register> <data> Ensure data is written to the specified register]]></actions>
+	<expectedresults><![CDATA[Ensure data is written to the specified register successfully]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11295" name="Unload i2c-dev Module">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[7]]></externalid>
+	<fullexternalid><![CDATA[pcie-7]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that the i2c-dev module can be unloaded]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded,i2c_piix4 module loaded]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>7.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Connect to vm]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Execute sudo modprobe -r i2c-dev]]></actions>
+	<expectedresults><![CDATA[Ensure that the i2c-dev module is unloaded successfully without errors]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11377" name="Adapter Name">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[28]]></externalid>
+	<fullexternalid><![CDATA[pcie-28]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Ensure that the adapter name for the LM75 sensor is reported correctly by the system.]]></summary>
+	<preconditions><![CDATA[lm-sensors, LM75, detect]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>28.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute sudo sensors]]></actions>
+	<expectedresults><![CDATA[Ensure adapter name is right]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[check adapter name]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11381" name="LM75 Configuration File Presence">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[29]]></externalid>
+	<fullexternalid><![CDATA[pcie-29]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that the LM75 sensor has an associated configuration file in /etc/sensors3.conf.]]></summary>
+	<preconditions><![CDATA[lm-sensors, LM75, detect]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>29.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[check the file presence]]></actions>
+	<expectedresults><![CDATA[Ensure conf file is present]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11384" name="Read temp using register">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[30]]></externalid>
+	<fullexternalid><![CDATA[pcie-30]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that tempreture reading fetched using register accesss]]></summary>
+	<preconditions><![CDATA[i2c-dev , i2c-piix4 modules loaded, device connected]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>30.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[check using i2cget command]]></actions>
+	<expectedresults><![CDATA[Temperature value should be listed]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite><testsuite id="11280" name="PCIE" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Nested test suite]]></details> 
+
+<testcase internalid="11281" name="Bus: List Available I2C Buses">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[3]]></externalid>
+	<fullexternalid><![CDATA[pcie-3]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that available I2C buses can be listed]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded,i2c_piix4 module loaded]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>3.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Connect to vm]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Execute ls /dev/i2c-*]]></actions>
+	<expectedresults><![CDATA[Ensure device nodes should be listed.]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11285" name="Devices : Scan I2C Bus for Devices">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[4]]></externalid>
+	<fullexternalid><![CDATA[pcie-4]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that I2C bus can be scanned for devices]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded, I2C devices connected]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>4.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Connect to vm]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Execute sudo i2cdetect -y <bus-number>]]></actions>
+	<expectedresults><![CDATA[Ensure that the connected I2C devices on  <bus number>  are detected and listed]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11289" name="Read from device register">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[5]]></externalid>
+	<fullexternalid><![CDATA[pcie-5]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that correct data is returned from the device]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded, i2c_piix4 module loaded,I2C devices connected]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>5.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute i2cget -y <bus_number> <device_address> <register>]]></actions>
+	<expectedresults><![CDATA[Ensure that correct data is returned from the specified register]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11344" name="I2C Block Write">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[18]]></externalid>
+	<fullexternalid><![CDATA[pcie-18]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify block write operation to an I2C device        ]]></summary>
+	<preconditions><![CDATA[i2c-dev , i2c-piix4 modules loaded, device connected]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>18.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute i2cset -y -f <bus_number> <device_address> <register> <data> <data>]]></actions>
+	<expectedresults><![CDATA[Ensure the block write operation is successful        ]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11347" name="SMBus Block Write">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[19]]></externalid>
+	<fullexternalid><![CDATA[pcie-19]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify SMbus block write operation to an I2C device        ]]></summary>
+	<preconditions><![CDATA[i2c-dev , i2c-piix4 modules loaded, device connected]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>19.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute i2cset -y -f <bus_number> <device_address> <register> <data> <data> s]]></actions>
+	<expectedresults><![CDATA[Ensure the SMbus block write operation is successful        ]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11350" name="SMBus Support">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[20]]></externalid>
+	<fullexternalid><![CDATA[pcie-20]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify SMBus-specific commands and expected data output]]></summary>
+	<preconditions><![CDATA[i2c-dev , i2c-piix4 modules loaded, device connected]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>20.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute i2cget -y <bus_number> <device_address> w]]></actions>
+	<expectedresults><![CDATA[Ensure SMBus command is correctly handled and data is outputted]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+<keywords><keyword name="sanity"><notes><![CDATA[
+Description for the sanity keyword.
+]]></notes></keyword>
+</keywords></testcase>
+</testsuite><testsuite id="11299" name="UART" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Nested test suite]]></details> 
+
+<testcase internalid="11300" name="Unload i2c-piix4 Module">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[8]]></externalid>
+	<fullexternalid><![CDATA[pcie-8]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that the i2c-piix4 module can be unloaded]]></summary>
+	<preconditions><![CDATA[i2c_piix4 module loaded]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>8.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute sudo modprobe -r i2c-piix4]]></actions>
+	<expectedresults><![CDATA[Ensure that the i2c-piix4 module is unloaded successfully without errors]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11303" name="Check Permissions on I2C Device Files">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[9]]></externalid>
+	<fullexternalid><![CDATA[pcie-9]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify the permissions on I2C device files]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded,i2c_piix4 module loaded]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>9.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Connect to vm]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Execute ls -l /dev/i2c-*]]></actions>
+	<expectedresults><![CDATA[Ensure that the correct permissions and ownership are set for I2C device files]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11353" name="Driver initialization : Load lm75 Module">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[21]]></externalid>
+	<fullexternalid><![CDATA[pcie-21]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that the lm75 module can be loaded]]></summary>
+	<preconditions><![CDATA[System running Linux OS, root access]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>21.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute sudo modprobe lm75]]></actions>
+	<expectedresults><![CDATA[Ensure that the lm75 module is loaded successfully without errors]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11356" name="Unload lm75 Module">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[22]]></externalid>
+	<fullexternalid><![CDATA[pcie-22]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that the lm75 module can be unloaded]]></summary>
+	<preconditions><![CDATA[lm75 module loaded]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>22.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute sudo modprobe -r lm75]]></actions>
+	<expectedresults><![CDATA[Ensure that the lm75 module is unloaded successfully.]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11359" name="Register device on bus">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[23]]></externalid>
+	<fullexternalid><![CDATA[pcie-23]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify the driver is attached and device files /hwmon are created ]]></summary>
+	<preconditions><![CDATA[device files /hwmon]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>23.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[written service file so restart service]]></actions>
+	<expectedresults><![CDATA[Ensure driver loaded and attacted to the device]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11362" name="Device Removal from bus">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[24]]></externalid>
+	<fullexternalid><![CDATA[pcie-24]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that the device removed from the bus using delete_device file]]></summary>
+	<preconditions><![CDATA[device should remove from bus]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>24.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Remove device using delete_device]]></actions>
+	<expectedresults><![CDATA[Ensure i2cdetect doesnt show removed device]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite>
+<testcase internalid="11330" name="I2C Block Read">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[15]]></externalid>
+	<fullexternalid><![CDATA[pcie-15]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that the content of the I2C device can be dumped]]></summary>
+	<preconditions><![CDATA[i2c-dev ,i2c-piix4 module loaded, device connected]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>15.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute i2cdump -y <bus_number> <device_address>]]></actions>
+	<expectedresults><![CDATA[Ensure the content of the I2C device is dumped successfully]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Observe the data dump]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+<testsuite id="11365" name="GPIO" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Nested test suite]]></details> 
+
+<testcase internalid="11366" name="Device Detection">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[25]]></externalid>
+	<fullexternalid><![CDATA[pcie-25]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify the dmesg for device detection]]></summary>
+	<preconditions><![CDATA[sensor should detect]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>25.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[check the dmesg]]></actions>
+	<expectedresults><![CDATA[Ensure device detected ]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11369" name="Read Temperature">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[26]]></externalid>
+	<fullexternalid><![CDATA[pcie-26]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify the sensor gives the temperature readings ]]></summary>
+	<preconditions><![CDATA[sensor should give temp values]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>26.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[check device files under /hwmon]]></actions>
+	<expectedresults><![CDATA[Ensure the sensor gives the temperature values]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[cat /sys/class/hwmon/hwmon0/temp1_input]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11373" name="Detect LM75 Sensor">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[27]]></externalid>
+	<fullexternalid><![CDATA[pcie-27]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify that lm-sensors can detect the LM75 sensor]]></summary>
+	<preconditions><![CDATA[lm-sensors, LM75, detect]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>27.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute sudo sensors]]></actions>
+	<expectedresults><![CDATA[Ensure LM75 sensor is detected by lm-sensors]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Verify detection of the LM75 sensor]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite></testsuite><testsuite id="11307" name="Negative" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Imported test suite]]></details> 
+<testsuite id="11308" name="PCIE" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Nested test suite]]></details> 
+
+<testcase internalid="11309" name="Non-Existent I2C Bus">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[10]]></externalid>
+	<fullexternalid><![CDATA[pcie-10]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify behavior with non-existent I2C bus]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded.i2c_piix4 module loaded]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>10.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Connect to vm]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Execute sudo i2cdetect -y 99]]></actions>
+	<expectedresults><![CDATA[Ensure that an error message is displayed indicating the bus does not exist]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11313" name="Incorrect Device Address">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[11]]></externalid>
+	<fullexternalid><![CDATA[pcie-11]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify behavior with incorrect device address]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded,i2c_piix4 module loaded]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>11.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Connect to vm]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Execute sudo i2cdump -y 1 0xFF]]></actions>
+	<expectedresults><![CDATA[Ensure that an error message is displayed indicating the address is incorrect]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite><testsuite id="11317" name="FVP" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Nested test suite]]></details> 
+
+<testcase internalid="11318" name="Insufficient Permissions">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[12]]></externalid>
+	<fullexternalid><![CDATA[pcie-12]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify read/write with insufficient permissions]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded,i2c_piix4 module loaded]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>12.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Change permissions on /dev/i2c-1 to non-root]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Attempt to read/write]]></actions>
+	<expectedresults><![CDATA[Ensure that an error message is displayed due to insufficient permissions]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11322" name="Unload Module While In Use">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[13]]></externalid>
+	<fullexternalid><![CDATA[pcie-13]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify module unloading while in use]]></summary>
+	<preconditions><![CDATA[i2c-dev module loaded, I2C in use]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>13.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Attempt to unload i2c-dev while it’s in use]]></actions>
+	<expectedresults><![CDATA[Ensure that an error message is displayed indicating the module is busy]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="11325" name="Device or Resource Busy in I2C">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[14]]></externalid>
+	<fullexternalid><![CDATA[pcie-14]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Verify error handling when I2C device is busy        ]]></summary>
+	<preconditions><![CDATA[i2c-dev ,i2c_piix4 modules loaded, device connected, device in use        ]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>14.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[make sure lm75 module loaded this will use 1 process]]></actions>
+	<expectedresults><![CDATA[Ensure that the error message "Device or Resource Busy" is displayed]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Continuously access the I2C device using i2cget using i2c-tools 2 nd process]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[3]]></step_number>
+	<actions><![CDATA[Observe the error message]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite></testsuite><testsuite id="11334" name="Performance" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Imported test suite]]></details> 
+<testsuite id="11335" name="FVP" >
+<node_order><![CDATA[0]]></node_order>
+<details><![CDATA[Nested test suite]]></details> 
+
+<testcase internalid="11336" name="I2C Read Latency">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[16]]></externalid>
+	<fullexternalid><![CDATA[pcie-16]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[Measure the latency of reading data from an I2C device]]></summary>
+	<preconditions><![CDATA[i2c-dev , i2c-piix4 modules loaded, device connected]]></preconditions>
+	<execution_type><![CDATA[2]]></execution_type>
+	<importance><![CDATA[1]]></importance>
+	<estimated_exec_duration>16.00</estimated_exec_duration>
+	<status>0</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Execute time i2cget -y <bus_number> <device_address> <register>]]></actions>
+	<expectedresults><![CDATA[Ensure read latency is within acceptable limits]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Record time taken]]></actions>
+	<expectedresults><![CDATA[]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+<keywords><keyword name="sanity"><notes><![CDATA[
+Description for the sanity keyword.
+]]></notes></keyword>
+<keyword name="regression"><notes><![CDATA[
+Discription for the regressiontest case
+]]></notes></keyword>
+</keywords></testcase>
+</testsuite>
+<testcase internalid="11340" name="Device_testing">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[17]]></externalid>
+	<fullexternalid><![CDATA[pcie-17]]></fullexternalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[testing a device]]></summary>
+	<preconditions><![CDATA[Device must be powered on]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration>5.00</estimated_exec_duration>
+	<status>1</status>
+	<is_open>1</is_open>
+	<active>1</active>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[Connect device]]></actions>
+	<expectedresults><![CDATA[Device connected]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[Start testing]]></actions>
+	<expectedresults><![CDATA[Tests running]]></expectedresults>
+	<execution_type><![CDATA[2]]></execution_type>
+</step>
+</steps>
+<keywords><keyword name="regression"><notes><![CDATA[
+Discription for the regressiontest case
+]]></notes></keyword>
+<keyword name="Security"><notes><![CDATA[
+Description for the Security keyword.
+]]></notes></keyword>
+</keywords></testcase>
+</testsuite></testsuite>

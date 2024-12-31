@@ -166,7 +166,7 @@ Follow these steps to export test cases from TestLink:
    
 3. The exported Excel file, `test_cases.xlsx`, will be saved in the `Excelsheet` folder.
 
-### Converting xml to excel
+### Converting xml to excel for Requirements
 Make sure to download the xml file from testlink and place it in TestLinkAPI/Req_xml_to_excel folder
 
 Follow these steps to convert the requirements in xml format to excel format:
@@ -179,6 +179,26 @@ Follow these steps to convert the requirements in xml format to excel format:
    python3 Core/xml_to_excel.py
    
 3. The resultant Excel file, `Output_Req.xlsx`, will be saved in the `TestLinkAPI/Req_xml_to_excel` folder.
+
+
+### Converting xml to excel for testcases
+Make sure to download the xml file from testlink and place it in TestLinkAPI/TestCase_xml_to_excel folder
+
+Follow these steps to convert the requirements in xml format to excel format:
+1. **Navigate to the TestLinkAPI/TestCase_xml_to_excel:**
+   ```bash
+   cd TestLinkAPI/TestCase_xml_to_excel
+
+2. **Run the export script using Python 3:**
+   ```bash
+   python3 Core/TC_xml_to_excel.py
+   
+3. The resultant Excel file, `out.xlsx`, will be saved in the `TC_xml_to_excel.py` folder.
+
+
+
+
+
 
 
 ---
