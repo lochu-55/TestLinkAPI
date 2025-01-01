@@ -1,116 +1,147 @@
 import xml.etree.ElementTree as ET
-import pandas as pd
+from openpyxl import Workbook
 import re
 
+# Function to remove HTML tags from a string
 def clean_html(raw_html):
     """Remove HTML tags from a string."""
     raw_html = raw_html.replace("&nbsp;", " ")
     clean = re.compile('<.*?>')
     return re.sub(clean, '', raw_html).strip()
 
+# Function to map status values to their meanings
 def get_status(val):
-    status_dict = {'1': 'Draft', '2': 'Ready for review', '3': 'Review in progress',
-                       '4': 'Rework', '5': 'Obsolete', '6': 'Future', '7': 'Final'}
-    status = status_dict.get(val," ")
-    return status
+    status_dict = {
+        '1': 'Draft', '2': 'Ready for review', '3': 'Review in progress',
+        '4': 'Rework', '5': 'Obsolete', '6': 'Future', '7': 'Final'
+    }
+    return status_dict.get(val, " ")
 
-
+# Function to map importance values to their meanings
 def get_importance(val):
     imp_dict = {'1': 'High', '2': 'Medium', '3': 'Low'}
-    importance = imp_dict.get(val, " ")
-    return importance
+    return imp_dict.get(val, " ")
 
+# Function to map execution type values to their meanings
 def get_execution_type(val):
     exec_dict = {'1': 'Manual', '2': 'Automated'}
-    execution_type = exec_dict.get(val, " ")
-    return execution_type
+    return exec_dict.get(val, " ")
 
-def parse_test_suite(xml_node, parent_names=[]):
-    data = []
-    suite_name = xml_node.attrib.get("name", "")
-    current_names = parent_names + [suite_name]
+def process_testsuite(testsuite, worksheet, suite_hierarchy, printed_hierarchy, row_counter=[1]):
+    suite_name = testsuite.get("name")
+    suite_hierarchy.append(suite_name)
 
-    for child in xml_node:
-        if child.tag == "testsuite":
-            data.extend(parse_test_suite(child, current_names))
-        elif child.tag == "testcase":
-            testcase_name = child.attrib.get("name", "")
-            testcase_id = child.attrib.get("internalid", "")
-            summary = clean_html(child.findtext("summary", ""))
-            preconditions = clean_html(child.findtext("preconditions", ""))
-            status_raw = child.findtext("status", "")
-            importance_raw = child.findtext("importance", "")
-            execution_type_raw = child.findtext("execution_type", "")
-            estimated_duration = child.findtext("estimated_exec_duration", "")
+    for testcase in testsuite.findall("testcase"):
+        # Get the test case name
+        case_name = testcase.get("name", " ")
 
-            status = get_status(status_raw)
-            importance = get_importance(importance_raw)
-            execution_type = get_execution_type(execution_type_raw)
+        summary = (testcase.find("summary").text.strip() if testcase.find("summary") is not None else " ")
+        preconditions_element = testcase.find("preconditions")
+        preconditions = preconditions_element.text.strip() if preconditions_element is not None and preconditions_element.text else " "
+        clean_summary = clean_html(summary)  # Remove HTML tags from the summary
+        clean_preconditions = clean_html(preconditions)
+        t_execution_type_ele = testcase.find("execution_type")
+        t_execution_type = get_execution_type(t_execution_type_ele.text.strip()) if t_execution_type_ele is not None and t_execution_type_ele.text else " "
+        importance_ele = testcase.find("importance")
+        importance = get_importance(importance_ele.text.strip()) if importance_ele is not None and importance_ele.text else " "
+        estimated_exec_duration_ele = testcase.find("estimated_exec_duration")
+        estimated_exec_duration = estimated_exec_duration_ele.text.strip() if estimated_exec_duration_ele is not None and estimated_exec_duration_ele.text else " "
+        status_ele = testcase.find("status")
+        status = get_status(status_ele.text.strip()) if status_ele is not None and status_ele.text else " "
 
-            keywords = ", ".join([kw.attrib.get("name", "") for kw in child.findall("keywords/keyword")])
+        test_case_row_added = False
+        # Check if steps exist, and create rows for each step
+        steps_found = False  # Flag to check if steps are found
+        for step in testcase.findall("steps/step"):
+            steps_found = True
+            step_number = step.find("step_number").text if step.find("step_number") is not None else ""
+            actions = step.find("actions").text.strip() if step.find("actions") is not None else ""
+            expectedresults_ele = step.find("expectedresults")
+            expectedresults = expectedresults_ele.text.strip() if expectedresults_ele is not None and expectedresults_ele.text else ""
+            execution_type_ele = step.find("execution_type")
+            execution_type = get_execution_type(execution_type_ele.text.strip()) if execution_type_ele is not None and execution_type_ele.text else ""
 
-            steps = []
-            for step in child.findall("steps/step"):
-                step_number = step.findtext("step_number", "")
-                actions = clean_html(step.findtext("actions", ""))
-                expected_results = clean_html(step.findtext("expectedresults", ""))
-                step_execution_type = get_execution_type(step.findtext("execution_type", execution_type))
-                steps.append({
-                    "Step Number": step_number,
-                    "Step Actions": actions,
-                    "Step Expected Results": expected_results,
-                    "Step Execution Type": step_execution_type
-                })
+            # Clean the HTML tags for actions and expected results
+            clean_actions = clean_html(actions)
+            clean_expectedresults = clean_html(expectedresults)
 
-            suite_columns = {f"Suite Level {i+1}": name for i, name in enumerate(current_names[1:])}  
+            # Create a new row for each step
+            step_row = ["" for _ in range(max_level)] + ["", "", "", ""]
+            step_row[max_level + 3:max_level + 6] = [step_number, clean_actions, clean_expectedresults, execution_type]
 
-            if steps:
-                for idx, step in enumerate(steps):
-                    data.append({
-                        **({key: value if idx == 0 else "" for key, value in suite_columns.items()}),
-                        "Test Case Name": testcase_name if idx == 0 else "",
-                        "Test Case ID": testcase_id if idx == 0 else "",
-                        "Status": status if idx == 0 else "",
-                        "Execution Type": execution_type if idx == 0 else "",
-                        "Importance": importance if idx == 0 else "",
-                        "Preconditions": preconditions if idx == 0 else "",
-                        "Summary": summary if idx == 0 else "",
-                        "Estimated Duration": estimated_duration if idx == 0 else "",
-                        "Keywords": keywords if idx == 0 else "",
-                        **step
-                    })
+            # Add test case details (name, summary, preconditions) only once
+            if not test_case_row_added:
+                step_row[max_level:max_level + 3] = [case_name, clean_summary, clean_preconditions, t_execution_type, importance, estimated_exec_duration, status]
+                test_case_row_added = True
             else:
-                data.append({
-                    **suite_columns,
-                    "Test Case Name": testcase_name,
-                    "Test Case ID": testcase_id,
-                    "Status": status,
-                    "Execution Type": execution_type,
-                    "Importance": importance,
-                    "Preconditions": preconditions,
-                    "Summary": summary,
-                    "Estimated Duration": estimated_duration,
-                    "Keywords": keywords,
-                    "Step Number": "",
-                    "Step Actions": "",
-                    "Step Expected Results": "",
-                    "Step Execution Type": ""
-                })
+                step_row[max_level:max_level + 3] = ["", "", "", "", "", "", ""]
 
-    return data
+            # Fill suite levels only if not already printed for this row
+            for i, suite in enumerate(suite_hierarchy):
+                if not printed_hierarchy[i]:
+                    step_row[i] = suite
+                    printed_hierarchy[i] = True
+
+            # Append the step row
+            worksheet.append(step_row)
+            row_counter[0] += 1
+
+        # If no steps are found, add a row with empty columns for steps
+        if not steps_found:
+            empty_step_row = ["" for _ in range(max_level)] + ["", "", "", "", "", "", ""]
+            empty_step_row[max_level:max_level + 3] = [case_name, clean_summary, clean_preconditions, t_execution_type, importance, estimated_exec_duration, status]
+            for i, suite in enumerate(suite_hierarchy):
+                if not printed_hierarchy[i]:
+                    empty_step_row[i] = suite
+                    printed_hierarchy[i] = True
+            worksheet.append(empty_step_row)
+            row_counter[0] += 1
+
+    # Process nested suites (sub-suites)
+    for nested_suite in testsuite.findall("testsuite"):
+        process_testsuite(nested_suite, worksheet, suite_hierarchy.copy(), printed_hierarchy.copy(), row_counter)
+
+    # Remove the current suite from the hierarchy after processing
+    suite_hierarchy.pop()
+
+def find_max_depth(testsuite, current_depth=1):
+    max_depth = current_depth
+    for nested_suite in testsuite.findall("testsuite"):
+        nested_depth = find_max_depth(nested_suite, current_depth + 1)
+        max_depth = max(max_depth, nested_depth)
+    return max_depth
 
 def xml_to_excel(xml_file, excel_file):
+    global max_level
+
+    # Parse the XML file
     tree = ET.parse(xml_file)
     root = tree.getroot()
 
-    data = parse_test_suite(root)
+    # Calculate the actual maximum depth of the suite hierarchy
+    max_level = max(find_max_depth(suite) for suite in root.findall("testsuite"))
 
-    df = pd.DataFrame(data)
+    # Create a new Excel workbook and worksheet
+    workbook = Workbook()
+    worksheet = workbook.active
+    worksheet.title = "Test Cases"
 
-    df.to_excel(excel_file, index=False, sheet_name="Test Cases")
+    # Add headers to the worksheet, dynamically adjusting for actual depth
+    headers = [f"Suite Level {i+1}" for i in range(max_level)] + ["Test Case Name", "Summary", "Preconditions", "Test Execution Type", "Importance", "Estimated Exec Duration", "Status", "Step Number", "Actions", "Step Expected Results", "Step Execution Type"]
+    worksheet.append(headers)
 
-xml_file = "PCI.xml"
-excel_file = "out.xlsx"
+    # Process the top-level test suites
+    for testsuite in root.findall("testsuite"):
+        process_testsuite(testsuite, worksheet, [], [False] * max_level)
 
-xml_to_excel(xml_file, excel_file)
-print("Converting xml to excel done")
+    # Save the Excel file
+    workbook.save(excel_file)
+    print(f"Excel file saved as {excel_file}")
+
+if __name__ == "__main__":
+    # Input XML file and output Excel file
+    xml_file = "PCI.xml"  # Replace with your XML file path
+    excel_file = "out.xlsx"  # Replace with your desired Excel output file path
+
+    # Call the conversion function
+    xml_to_excel(xml_file, excel_file)

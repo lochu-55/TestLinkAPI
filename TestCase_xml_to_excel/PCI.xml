@@ -702,166 +702,71 @@ Description for the sanity keyword.
 </step>
 </steps>
 </testcase>
-</testsuite></testsuite><testsuite id="11307" name="Negative" >
-<node_order><![CDATA[0]]></node_order>
-<details><![CDATA[Imported test suite]]></details> 
-<testsuite id="11308" name="PCIE" >
-<node_order><![CDATA[0]]></node_order>
-<details><![CDATA[Nested test suite]]></details> 
-
-<testcase internalid="11309" name="Non-Existent I2C Bus">
-	<node_order><![CDATA[0]]></node_order>
-	<externalid><![CDATA[10]]></externalid>
-	<fullexternalid><![CDATA[pcie-10]]></fullexternalid>
+<testsuite id="11420" name="GPIO_1" >
+<node_order><![CDATA[1]]></node_order>
+<details><![CDATA[<p>Details GPIO_1</p>
+]]></details> 
+<keywords><keyword name="Basic Functional"><notes><![CDATA[
+Description for the Functional keyword.
+]]></notes></keyword>
+<keyword name="sanity"><notes><![CDATA[
+Description for the sanity keyword.
+]]></notes></keyword>
+<keyword name="performance"><notes><![CDATA[
+Description for the Performance keyword.
+]]></notes></keyword>
+<keyword name="regression"><notes><![CDATA[
+Discription for the regressiontest case
+]]></notes></keyword>
+<keyword name="Security"><notes><![CDATA[
+Description for the Security keyword.
+]]></notes></keyword>
+<keyword name="Stability"><notes><![CDATA[
+Description for the Stability keyword.
+]]></notes></keyword>
+<keyword name="smoke"><notes><![CDATA[
+Description for the smoke keyword.
+]]></notes></keyword>
+</keywords>
+<testcase internalid="11421" name="test_01">
+	<node_order><![CDATA[1000]]></node_order>
+	<externalid><![CDATA[33]]></externalid>
+	<fullexternalid><![CDATA[pcie-33]]></fullexternalid>
 	<version><![CDATA[1]]></version>
-	<summary><![CDATA[Verify behavior with non-existent I2C bus]]></summary>
-	<preconditions><![CDATA[i2c-dev module loaded.i2c_piix4 module loaded]]></preconditions>
+	<summary><![CDATA[<p>summary test_01</p>
+]]></summary>
+	<preconditions><![CDATA[<p>preconditions test_01</p>
+]]></preconditions>
 	<execution_type><![CDATA[2]]></execution_type>
-	<importance><![CDATA[1]]></importance>
-	<estimated_exec_duration>10.00</estimated_exec_duration>
-	<status>0</status>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>4</status>
 	<is_open>1</is_open>
 	<active>1</active>
-<steps>
-<step>
-	<step_number><![CDATA[1]]></step_number>
-	<actions><![CDATA[Connect to vm]]></actions>
-	<expectedresults><![CDATA[]]></expectedresults>
-	<execution_type><![CDATA[1]]></execution_type>
-</step>
 
-<step>
-	<step_number><![CDATA[2]]></step_number>
-	<actions><![CDATA[Execute sudo i2cdetect -y 99]]></actions>
-	<expectedresults><![CDATA[Ensure that an error message is displayed indicating the bus does not exist]]></expectedresults>
-	<execution_type><![CDATA[1]]></execution_type>
-</step>
-</steps>
-</testcase>
-
-<testcase internalid="11313" name="Incorrect Device Address">
-	<node_order><![CDATA[0]]></node_order>
-	<externalid><![CDATA[11]]></externalid>
-	<fullexternalid><![CDATA[pcie-11]]></fullexternalid>
-	<version><![CDATA[1]]></version>
-	<summary><![CDATA[Verify behavior with incorrect device address]]></summary>
-	<preconditions><![CDATA[i2c-dev module loaded,i2c_piix4 module loaded]]></preconditions>
-	<execution_type><![CDATA[2]]></execution_type>
-	<importance><![CDATA[1]]></importance>
-	<estimated_exec_duration>11.00</estimated_exec_duration>
-	<status>0</status>
-	<is_open>1</is_open>
-	<active>1</active>
-<steps>
-<step>
-	<step_number><![CDATA[1]]></step_number>
-	<actions><![CDATA[Connect to vm]]></actions>
-	<expectedresults><![CDATA[]]></expectedresults>
-	<execution_type><![CDATA[1]]></execution_type>
-</step>
-
-<step>
-	<step_number><![CDATA[2]]></step_number>
-	<actions><![CDATA[Execute sudo i2cdump -y 1 0xFF]]></actions>
-	<expectedresults><![CDATA[Ensure that an error message is displayed indicating the address is incorrect]]></expectedresults>
-	<execution_type><![CDATA[1]]></execution_type>
-</step>
-</steps>
-</testcase>
-</testsuite><testsuite id="11317" name="FVP" >
-<node_order><![CDATA[0]]></node_order>
-<details><![CDATA[Nested test suite]]></details> 
-
-<testcase internalid="11318" name="Insufficient Permissions">
-	<node_order><![CDATA[0]]></node_order>
-	<externalid><![CDATA[12]]></externalid>
-	<fullexternalid><![CDATA[pcie-12]]></fullexternalid>
-	<version><![CDATA[1]]></version>
-	<summary><![CDATA[Verify read/write with insufficient permissions]]></summary>
-	<preconditions><![CDATA[i2c-dev module loaded,i2c_piix4 module loaded]]></preconditions>
-	<execution_type><![CDATA[2]]></execution_type>
-	<importance><![CDATA[1]]></importance>
-	<estimated_exec_duration>12.00</estimated_exec_duration>
-	<status>0</status>
-	<is_open>1</is_open>
-	<active>1</active>
-<steps>
-<step>
-	<step_number><![CDATA[1]]></step_number>
-	<actions><![CDATA[Change permissions on /dev/i2c-1 to non-root]]></actions>
-	<expectedresults><![CDATA[]]></expectedresults>
-	<execution_type><![CDATA[1]]></execution_type>
-</step>
-
-<step>
-	<step_number><![CDATA[2]]></step_number>
-	<actions><![CDATA[Attempt to read/write]]></actions>
-	<expectedresults><![CDATA[Ensure that an error message is displayed due to insufficient permissions]]></expectedresults>
-	<execution_type><![CDATA[1]]></execution_type>
-</step>
-</steps>
-</testcase>
-
-<testcase internalid="11322" name="Unload Module While In Use">
-	<node_order><![CDATA[0]]></node_order>
-	<externalid><![CDATA[13]]></externalid>
-	<fullexternalid><![CDATA[pcie-13]]></fullexternalid>
-	<version><![CDATA[1]]></version>
-	<summary><![CDATA[Verify module unloading while in use]]></summary>
-	<preconditions><![CDATA[i2c-dev module loaded, I2C in use]]></preconditions>
-	<execution_type><![CDATA[2]]></execution_type>
-	<importance><![CDATA[1]]></importance>
-	<estimated_exec_duration>13.00</estimated_exec_duration>
-	<status>0</status>
-	<is_open>1</is_open>
-	<active>1</active>
-<steps>
-<step>
-	<step_number><![CDATA[1]]></step_number>
-	<actions><![CDATA[Attempt to unload i2c-dev while it’s in use]]></actions>
-	<expectedresults><![CDATA[Ensure that an error message is displayed indicating the module is busy]]></expectedresults>
-	<execution_type><![CDATA[2]]></execution_type>
-</step>
-</steps>
-</testcase>
-
-<testcase internalid="11325" name="Device or Resource Busy in I2C">
-	<node_order><![CDATA[0]]></node_order>
-	<externalid><![CDATA[14]]></externalid>
-	<fullexternalid><![CDATA[pcie-14]]></fullexternalid>
-	<version><![CDATA[1]]></version>
-	<summary><![CDATA[Verify error handling when I2C device is busy        ]]></summary>
-	<preconditions><![CDATA[i2c-dev ,i2c_piix4 modules loaded, device connected, device in use        ]]></preconditions>
-	<execution_type><![CDATA[2]]></execution_type>
-	<importance><![CDATA[1]]></importance>
-	<estimated_exec_duration>14.00</estimated_exec_duration>
-	<status>0</status>
-	<is_open>1</is_open>
-	<active>1</active>
-<steps>
-<step>
-	<step_number><![CDATA[1]]></step_number>
-	<actions><![CDATA[make sure lm75 module loaded this will use 1 process]]></actions>
-	<expectedresults><![CDATA[Ensure that the error message "Device or Resource Busy" is displayed]]></expectedresults>
-	<execution_type><![CDATA[2]]></execution_type>
-</step>
-
-<step>
-	<step_number><![CDATA[2]]></step_number>
-	<actions><![CDATA[Continuously access the I2C device using i2cget using i2c-tools 2 nd process]]></actions>
-	<expectedresults><![CDATA[]]></expectedresults>
-	<execution_type><![CDATA[1]]></execution_type>
-</step>
-
-<step>
-	<step_number><![CDATA[3]]></step_number>
-	<actions><![CDATA[Observe the error message]]></actions>
-	<expectedresults><![CDATA[]]></expectedresults>
-	<execution_type><![CDATA[1]]></execution_type>
-</step>
-</steps>
-</testcase>
-</testsuite></testsuite><testsuite id="11334" name="Performance" >
+<keywords><keyword name="Basic Functional"><notes><![CDATA[
+Description for the Functional keyword.
+]]></notes></keyword>
+<keyword name="sanity"><notes><![CDATA[
+Description for the sanity keyword.
+]]></notes></keyword>
+<keyword name="performance"><notes><![CDATA[
+Description for the Performance keyword.
+]]></notes></keyword>
+<keyword name="regression"><notes><![CDATA[
+Discription for the regressiontest case
+]]></notes></keyword>
+<keyword name="Security"><notes><![CDATA[
+Description for the Security keyword.
+]]></notes></keyword>
+<keyword name="Stability"><notes><![CDATA[
+Description for the Stability keyword.
+]]></notes></keyword>
+<keyword name="smoke"><notes><![CDATA[
+Description for the smoke keyword.
+]]></notes></keyword>
+</keywords></testcase>
+</testsuite></testsuite></testsuite><testsuite id="11334" name="Performance" >
 <node_order><![CDATA[0]]></node_order>
 <details><![CDATA[Imported test suite]]></details> 
 <testsuite id="11335" name="FVP" >
