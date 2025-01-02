@@ -3,7 +3,6 @@ from openpyxl import Workbook
 import re
 
 def clean_html(raw_html):
-    """Remove HTML tags from a string."""
     raw_html = raw_html.replace("&nbsp;", " ")
     clean = re.compile('<.*?>')
     return re.sub(clean, '', raw_html).strip()
@@ -28,13 +27,12 @@ def process_testsuite(testsuite, worksheet, suite_hierarchy, printed_hierarchy, 
     suite_hierarchy.append(suite_name)
 
     for testcase in testsuite.findall("testcase"):
-        # Get the test case name
         case_name = testcase.get("name", " ")
 
         summary = (testcase.find("summary").text.strip() if testcase.find("summary") is not None else " ")
         preconditions_element = testcase.find("preconditions")
         preconditions = preconditions_element.text.strip() if preconditions_element is not None and preconditions_element.text else " "
-        clean_summary = clean_html(summary)  # Remove HTML tags from the summary
+        clean_summary = clean_html(summary) 
         clean_preconditions = clean_html(preconditions)
         t_execution_type_ele = testcase.find("execution_type")
         t_execution_type = get_execution_type(t_execution_type_ele.text.strip()) if t_execution_type_ele is not None and t_execution_type_ele.text else " "
@@ -46,8 +44,7 @@ def process_testsuite(testsuite, worksheet, suite_hierarchy, printed_hierarchy, 
         status = get_status(status_ele.text.strip()) if status_ele is not None and status_ele.text else " "
 
         test_case_row_added = False
-        # Check if steps exist, and create rows for each step
-        steps_found = False  # Flag to check if steps are found
+        steps_found = False  
         for step in testcase.findall("steps/step"):
             steps_found = True
             step_number = step.find("step_number").text if step.find("step_number") is not None else ""
@@ -124,5 +121,4 @@ if __name__ == "__main__":
     xml_file = "PCI.xml" 
     excel_file = "out.xlsx" 
 
-    # Call the conversion function
     xml_to_excel(xml_file, excel_file)
