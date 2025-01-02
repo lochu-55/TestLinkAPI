@@ -2,14 +2,12 @@ import xml.etree.ElementTree as ET
 from openpyxl import Workbook
 import re
 
-# Function to remove HTML tags from a string
 def clean_html(raw_html):
     """Remove HTML tags from a string."""
     raw_html = raw_html.replace("&nbsp;", " ")
     clean = re.compile('<.*?>')
     return re.sub(clean, '', raw_html).strip()
 
-# Function to map status values to their meanings
 def get_status(val):
     status_dict = {
         '1': 'Draft', '2': 'Ready for review', '3': 'Review in progress',
@@ -17,12 +15,10 @@ def get_status(val):
     }
     return status_dict.get(val, " ")
 
-# Function to map importance values to their meanings
 def get_importance(val):
     imp_dict = {'1': 'High', '2': 'Medium', '3': 'Low'}
     return imp_dict.get(val, " ")
 
-# Function to map execution type values to their meanings
 def get_execution_type(val):
     exec_dict = {'1': 'Manual', '2': 'Automated'}
     return exec_dict.get(val, " ")
@@ -61,32 +57,26 @@ def process_testsuite(testsuite, worksheet, suite_hierarchy, printed_hierarchy, 
             execution_type_ele = step.find("execution_type")
             execution_type = get_execution_type(execution_type_ele.text.strip()) if execution_type_ele is not None and execution_type_ele.text else ""
 
-            # Clean the HTML tags for actions and expected results
             clean_actions = clean_html(actions)
             clean_expectedresults = clean_html(expectedresults)
 
-            # Create a new row for each step
             step_row = ["" for _ in range(max_level)] + ["", "", "", ""]
             step_row[max_level + 3:max_level + 6] = [step_number, clean_actions, clean_expectedresults, execution_type]
 
-            # Add test case details (name, summary, preconditions) only once
             if not test_case_row_added:
                 step_row[max_level:max_level + 3] = [case_name, clean_summary, clean_preconditions, t_execution_type, importance, estimated_exec_duration, status]
                 test_case_row_added = True
             else:
                 step_row[max_level:max_level + 3] = ["", "", "", "", "", "", ""]
 
-            # Fill suite levels only if not already printed for this row
             for i, suite in enumerate(suite_hierarchy):
                 if not printed_hierarchy[i]:
                     step_row[i] = suite
                     printed_hierarchy[i] = True
 
-            # Append the step row
             worksheet.append(step_row)
             row_counter[0] += 1
 
-        # If no steps are found, add a row with empty columns for steps
         if not steps_found:
             empty_step_row = ["" for _ in range(max_level)] + ["", "", "", "", "", "", ""]
             empty_step_row[max_level:max_level + 3] = [case_name, clean_summary, clean_preconditions, t_execution_type, importance, estimated_exec_duration, status]
@@ -97,11 +87,9 @@ def process_testsuite(testsuite, worksheet, suite_hierarchy, printed_hierarchy, 
             worksheet.append(empty_step_row)
             row_counter[0] += 1
 
-    # Process nested suites (sub-suites)
     for nested_suite in testsuite.findall("testsuite"):
         process_testsuite(nested_suite, worksheet, suite_hierarchy.copy(), printed_hierarchy.copy(), row_counter)
 
-    # Remove the current suite from the hierarchy after processing
     suite_hierarchy.pop()
 
 def find_max_depth(testsuite, current_depth=1):
@@ -114,34 +102,27 @@ def find_max_depth(testsuite, current_depth=1):
 def xml_to_excel(xml_file, excel_file):
     global max_level
 
-    # Parse the XML file
     tree = ET.parse(xml_file)
     root = tree.getroot()
 
-    # Calculate the actual maximum depth of the suite hierarchy
     max_level = max(find_max_depth(suite) for suite in root.findall("testsuite"))
 
-    # Create a new Excel workbook and worksheet
     workbook = Workbook()
     worksheet = workbook.active
     worksheet.title = "Test Cases"
 
-    # Add headers to the worksheet, dynamically adjusting for actual depth
     headers = [f"Suite Level {i+1}" for i in range(max_level)] + ["Test Case Name", "Summary", "Preconditions", "Test Execution Type", "Importance", "Estimated Exec Duration", "Status", "Step Number", "Actions", "Step Expected Results", "Step Execution Type"]
     worksheet.append(headers)
 
-    # Process the top-level test suites
     for testsuite in root.findall("testsuite"):
         process_testsuite(testsuite, worksheet, [], [False] * max_level)
 
-    # Save the Excel file
     workbook.save(excel_file)
     print(f"Excel file saved as {excel_file}")
 
 if __name__ == "__main__":
-    # Input XML file and output Excel file
-    xml_file = "PCI.xml"  # Replace with your XML file path
-    excel_file = "out.xlsx"  # Replace with your desired Excel output file path
+    xml_file = "PCI.xml" 
+    excel_file = "out.xlsx" 
 
     # Call the conversion function
     xml_to_excel(xml_file, excel_file)
